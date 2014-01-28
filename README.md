@@ -1,6 +1,8 @@
 gifslap
 =======
 
+VJ Software for people who love gifs.
+
 Documentation coming soon.
 
 To run this, put it in your localhost folder.
