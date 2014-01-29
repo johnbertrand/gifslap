@@ -16,7 +16,7 @@ var control_handlers = {
 			return;
 		}
 
-		if(midi){return;}
+		//if(midi){return;}
 		
 		module_changer.step();
 	},

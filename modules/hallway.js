@@ -16,6 +16,8 @@ var hallway={
 	initialized: false,
 	ripple_cursor: 0,
 	strobe_cursor: 0,
+	origin_x: 500,
+	origin_y: 500,
 	init: function(){
 		hallway.run = !hallway.run;
 
@@ -93,12 +95,19 @@ var hallway={
 		if( controls.alted ){
 			hallway.perspective = 250;
 		}
+
+		//get control values from cursor
+		hallway.origin_x = controls.curs_width;
+		hallway.origin_y = controls.curs_height;
 		
+		//console.log(hallway.origin_x);
+		console.log(hallway.origin_x);
+
 		new_layer.css({
 			'opacity':'1',
 			'-webkit-perspective': hallway.perspective,
-			'-webkit-perspective-origin-x':controls.curs_width*200+"%",
-			'-webkit-perspective-origin-y':controls.curs_height*200+"%"
+			'-webkit-perspective-origin-x':hallway.origin_x*200+"%",
+			'-webkit-perspective-origin-y':hallway.origin_y*200+"%"
 		});
 		
 		

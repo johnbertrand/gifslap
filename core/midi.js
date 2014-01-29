@@ -157,6 +157,8 @@ if(midi){
 
 		}else if(a[0]==176&&a[1]==21){ //knob 14
 
+
+
 		}else if(a[0]==176&&a[1]==25){ //knob 15
 
 			/* * * * * * * * * * * * * 
@@ -164,7 +166,14 @@ if(midi){
 			* MOVE X                 *
 			* * * * * * * * * * * * */
 
+			
+
+			
+
 			chain.move_x = a[2]-64;
+
+			
+			
 
 		}else if(a[0]==176&&a[1]==29){ //knob 16 
 
@@ -174,6 +183,7 @@ if(midi){
 			* * * * * * * * * * * * */
 
 			chain.move_y = -a[2]+64;
+			hallway.origin_y = a[2]/10;
 
 		}else if(a[0]==176&&a[1]==18){ //knob 17
 
@@ -309,10 +319,10 @@ if(midi){
 
 			/* * * * * * * * * * * *  * 
 			*                         *
-			* TOGGLE CENTER PIC       *
+			* TOGGLE HALLWAY          *
 			* * * * * * * * * * * * * */
 
-			center_pic.init();
+			hallway.init();
 
 		}else if(a[0]==144&&a[1]==51&&a[2]>0){ //encoder press 2
 
@@ -535,7 +545,7 @@ if(midi){
 			chain.doubler = !chain.doubler;
 
 			if(chain.doubler){
-				chain.doubler_cursor = 	chain.cursor+1;
+				chain.doubler_cursor = 	chain.cursor;
 			}
 
 		}else if(a[0]==144&&a[1]==3&&a[2]>0){ //grid button 13
@@ -884,22 +894,22 @@ if(midi){
 	m_out(5,'white');
 	m_out(6,'off');
 	m_out(7,'off');
-	m_out(8,'green');
-	m_out(9,'green');
+	// m_out(8,'green');
+	// m_out(9,'green');
 	m_out(10,'white');
-	m_out(11,'red');
-	m_out(12,'green');
-	m_out(13,'green');
+	// m_out(11,'red');
+	// m_out(12,'green'); 
+	// m_out(13,'green');
 	m_out(14,'white');
 	m_out(15,'red');
 
 	// ENCODERS (turn them off)
-	m_out(48,'off');
-	m_out(49,'off');
-	m_out(50,'off');
-	m_out(51,'off');
+	m_out(48,'white');
+	m_out(49,'white');
+	m_out(50,'yellow');
+	m_out(51,'white');
 	m_out(52,'off');
-	m_out(53,'off');
+	m_out(53,'yellow');
 	m_out(54,'off');
 	m_out(55,'off');
 	m_out(56,'off');
@@ -918,26 +928,26 @@ if(midi){
 	m_out(18,'pink');
 	m_out(34,'white');
 
-	m_out(20,'blue');
-	m_out(21,'blue');
-	m_out(22,'blue');
-	m_out(36,'blue');
-	m_out(37,'blue');
+	// m_out(20,'blue'); //punches
+	// m_out(21,'blue');
+	// m_out(22,'blue');
+	// m_out(36,'blue');
+	// m_out(37,'blue');
 
 	m_out(39,'yellow');
 
 	m_out(24,'green');
 	m_out(40,'pink');
 
-	m_out(26,'blue');
-	m_out(27,'blue');
-	m_out(28,'blue');
-	m_out(42,'blue');
-	m_out(43,'blue');
-	m_out(44,'blue');
+	// m_out(26,'blue'); //bouncers
+	// m_out(27,'blue');
+	// m_out(28,'blue');
+	// m_out(42,'blue');
+	// m_out(43,'blue');
+	// m_out(44,'blue');
 
-	m_out(30,'white');
-	m_out(46,'white');
-	m_out(31,'white');
-	m_out(47,'white');
+	// m_out(30,'white'); //bumpers
+	// m_out(46,'white');
+	// m_out(31,'white');
+	// m_out(47,'white');
 }
