@@ -1,4 +1,7 @@
 
+// MIDI Control scheme for the LIVID CNTRL:R
+//
+
 var m_out = function(button,color){
 		if(!midi){return;}
 		switch(color){
@@ -80,6 +83,8 @@ if(midi){
 
 			if( circle.run ){
 				circle.container_spin_speed = a[2]*.05;
+			}else if( hallway.run ){
+				hallway.top_bottom_rotation = a[2]*3;
 			}else{
 				images.rotation = a[2]*3;
 			}
@@ -124,8 +129,15 @@ if(midi){
 			* GLOBAL ROTATE     *
 			* * * * * * * * * * */
 
+			if(hallway.run){ //if hallway is on, this turns the sides
+				hallway.sides_rotation = a[2]*3;
+				return;
+			}
+
 			images.rotation = a[2]*3;
-			$('img').css({'-webkit-transform':'rotate('+images.rotation+'deg)'});				
+			$('img').css({'-webkit-transform':'rotate('+images.rotation+'deg)'});
+
+
 
 		}else if(a[0]==176&&a[1]==3){ //knob 9
 
@@ -157,6 +169,26 @@ if(midi){
 
 		}else if(a[0]==176&&a[1]==21){ //knob 14
 
+			/* * * * * * * * * * * * * * * * *
+			*                                *
+			* HALLWAY ORIGIN DIVISOR         *
+			* * * * * * * * * * * * * * * * */
+
+			//prevent 0
+			if (a[2] == 0){ a[2] = 1; }
+			
+			// multiply first half of knob movement into large numbers
+			if(a[2]<100){ 
+				a[2] = a[2] * (a[2]*.025);
+
+			}else{ // divide second half of knob movement to small numbers
+				a[2] = a[2]/100;
+
+			}
+
+			hallway.origin_divisor = a[2];
+			hallway.origin_x = hallway.midi_x / hallway.origin_divisor;
+			hallway.origin_y = hallway.midi_y / hallway.origin_divisor;
 
 
 		}else if(a[0]==176&&a[1]==25){ //knob 15
@@ -166,13 +198,10 @@ if(midi){
 			* MOVE X                 *
 			* * * * * * * * * * * * */
 
-			
-
-			
-
 			chain.move_x = a[2]-64;
 
-			
+			hallway.midi_x = a[2];
+			hallway.origin_x = a[2]/hallway.origin_divisor;
 			
 
 		}else if(a[0]==176&&a[1]==29){ //knob 16 
@@ -183,7 +212,9 @@ if(midi){
 			* * * * * * * * * * * * */
 
 			chain.move_y = -a[2]+64;
-			hallway.origin_y = a[2]/10;
+
+			hallway.midi_y = a[2];
+			hallway.origin_y = a[2]/hallway.origin_divisor;
 
 		}else if(a[0]==176&&a[1]==18){ //knob 17
 

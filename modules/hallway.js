@@ -16,8 +16,13 @@ var hallway={
 	initialized: false,
 	ripple_cursor: 0,
 	strobe_cursor: 0,
-	origin_x: 500,
-	origin_y: 500,
+	origin_x: .25,
+	origin_y: .25,
+	origin_divisor: 100,
+	midi_x: .25,
+	midi_y: .25,
+	top_bottom_rotation: 0,
+	sides_rotation: 0,
 	init: function(){
 		hallway.run = !hallway.run;
 
@@ -85,7 +90,21 @@ var hallway={
 		hallway.run = false;
 		$('.hallway-top, .hallway-bottom, .hallway-right, .hallway-left').css('background-image','url()');		
 	},
+	mouse: function(){
+		if( !hallway.run ){ return; }
+		hallway.origin_x = controls.curs_width;
+		hallway.origin_y = controls.curs_height;
+	},
 	draw: function(){
+
+		hallway.layer.find(".hallway-bottom, .hallway-top").css({
+			"opacity":images.opacity,
+			'-webkit-transform': 'rotateX('+hallway.top_bottom_rotation+'deg)'
+		});
+		hallway.layer.find(".hallway-left, .hallway-right").css({
+			"opacity":images.opacity,
+			'-webkit-transform': 'rotateY('+hallway.sides_rotation+'deg)'
+		});
 
 		new_layer = hallway.layer.clone();
 
@@ -95,13 +114,6 @@ var hallway={
 		if( controls.alted ){
 			hallway.perspective = 250;
 		}
-
-		//get control values from cursor
-		hallway.origin_x = controls.curs_width;
-		hallway.origin_y = controls.curs_height;
-		
-		//console.log(hallway.origin_x);
-		console.log(hallway.origin_x);
 
 		new_layer.css({
 			'opacity':'1',

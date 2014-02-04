@@ -2,11 +2,16 @@
 var control_handlers = {
 
 	mouse_move: function(e){
+		
+		//set basic control variables
 		controls.curs_width = (e.pageX / window.innerWidth);
 		controls.curs_height = (e.pageY / window.innerHeight);
 
 		images.height=Math.floor((controls.curs_height*30)*(controls.curs_width*60));
-		
+		//fire mouse move functions from modules
+		hallway.mouse();
+
+
 	},
 
 	mouse_down: function(e){
