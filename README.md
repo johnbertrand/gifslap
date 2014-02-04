@@ -1,6 +1,8 @@
 #Gifslap
 ###VJ Software for people who love gifs.
 
+<img src="http://vcovault.com/digital_posters/thumbnails/still1_thumb.png" style="width:50%;height:auto;" />
+
 ####Install / Requirements:
 1. <a href="http://coolestguidesontheplanet.com/get-apache-mysql-php-phpmyadmin-working-osx-10-9-mavericks/">Enable local PHP & Apache</a>.
 2. Move the contents of this repository to your localhost folder.
