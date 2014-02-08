@@ -1,7 +1,12 @@
 <html>
 <head>
 <title>.gifSlap</title>
+
+<!-- ASSETS -->
+
 <link rel="stylesheet" href="core/assets/style.css" />
+<script type="text/javascript" src="core/assets/jquery-1.9.1.min.js"></script>
+
 </head>
 <body>
 <div id="corner-pic" class="hidden"></div>
@@ -19,7 +24,7 @@
 	<div id="count-images"></div>
 </div>
 
-<script type="text/javascript" src="core/assets/jquery-1.9.1.min.js"></script>
+
 
 <script>
 <? if( $_GET['midi']=="true" ){?>
@@ -31,9 +36,12 @@
 	</script>
 <? } ?>
 
+<!-- CORE -->
+
 <script src="core/midi.js"></script>
 <script src="core/images.js"></script>
 <script src="core/hud.js"></script>
+<script src="core/save_out.js"></script>
 
 
 <!-- MODULES -->
@@ -326,6 +334,7 @@ Big Features to Add:
 Modules to Add
 - Audio reaction
 - waveform generator
+- ASCII Art module: text writer, art displayer
 
 Module Improvements:
 - background size support in hallway

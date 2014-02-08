@@ -9,14 +9,14 @@ var corner_box = {
         'width': corner_box.width+"%",
         'position': 'absolute',
         'top': '0px',
-        'left': '0px;'
+        'left': '0px;',
+        'z-index':'100000000000'
       });
       $('body').append($box);
     }
 
     $pic = $('<img class="locked" src="'+images.set_array[corner_box.cursor]+'" />').css({
-      'width':"100%",
-      'z-index':'100000000000'
+      'width':"100%"
     });
 
     $('#corner-box').toggleClass('hidden').html($pic);

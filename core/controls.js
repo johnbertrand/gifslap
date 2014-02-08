@@ -237,13 +237,8 @@ var control_handlers = {
 
 		}else if(e.which==192){// ~ RECORD BUTTON
 			
-			if( controls.shifted ){
-				export_recording();
-			}else{
-				
-				//TOGGLE RECORDING		
-				toggle_value('recording');
-			}
+			save_out.run();
+			// save_out.get_img_srcs();
 			
 			
 		}else if(e.which==54){ // 6 
