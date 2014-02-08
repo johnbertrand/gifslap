@@ -94,17 +94,20 @@ var hallway={
 		if( !hallway.run ){ return; }
 		hallway.origin_x = controls.curs_width;
 		hallway.origin_y = controls.curs_height;
+
 	},
 	draw: function(){
 
-		hallway.layer.find(".hallway-bottom, .hallway-top").css({
-			"opacity":images.opacity,
-			'-webkit-transform': 'rotateX('+hallway.top_bottom_rotation+'deg)'
-		});
-		hallway.layer.find(".hallway-left, .hallway-right").css({
-			"opacity":images.opacity,
-			'-webkit-transform': 'rotateY('+hallway.sides_rotation+'deg)'
-		});
+		if(midi){
+			hallway.layer.find(".hallway-bottom, .hallway-top").css({
+				"opacity":images.opacity,
+				'-webkit-transform': 'rotateX('+hallway.top_bottom_rotation+'deg)'
+			});
+			hallway.layer.find(".hallway-left, .hallway-right").css({
+				"opacity":images.opacity,
+				'-webkit-transform': 'rotateY('+hallway.sides_rotation+'deg)'
+			});
+		}
 
 		new_layer = hallway.layer.clone();
 

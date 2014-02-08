@@ -171,6 +171,8 @@ var control_handlers = {
 
 		}else if(e.which==70){// F
 
+			keydown['f'] = true;
+
 		}else if(e.which==71){// G
 
 		}else if(e.which==72){// Height
@@ -250,7 +252,9 @@ var control_handlers = {
 	},
 	key_up: function(e){
 		
-		if(e.which==72){ mods['height'] = false; mods['default'] = true;$('#height').removeClass('active');}// Height
+		if(e.which==70){ // F
+			keydown['f'] = false; 
+		}else if(e.which==72){ mods['height'] = false; mods['default'] = true;$('#height').removeClass('active');}// Height
 		else if(e.which==79) { mods['opacity']=false; mods['default'] = true;$('#opacity').removeClass('active'); }// Opacity
 		else if(e.which==80){ // P
 			keydown['p'] = false; 
