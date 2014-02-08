@@ -11,7 +11,7 @@
 		'top': '0px'
 	});
 
-	$('body').append($bg_box);
+	$('#container').append($bg_box);
 }());
 
 

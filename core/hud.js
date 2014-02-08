@@ -1,6 +1,6 @@
 
 //initialize
-$('body').append(
+$('#container').append(
   $('<div id="preview-box"></div>')
   .attr("style", "position:absolute; bottom:0px; left:0px; width:500px; height:45px; z-index:10000000000000")
 );

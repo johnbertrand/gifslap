@@ -78,7 +78,7 @@ var hallway={
 			$layer.append($top, $left, $right, $bottom);
 			hallway.layer = $layer;
 
-			$('body').append($hallway);
+			$('#container').append($hallway);
 			hallway.initialized = true;
 			
 
@@ -88,7 +88,7 @@ var hallway={
 	},
 	clear: function(){
 		hallway.run = false;
-		$('.hallway-top, .hallway-bottom, .hallway-right, .hallway-left').css('background-image','url()');		
+		$('.hallway-top, .hallway-bottom, .hallway-right, .hallway-left').css('background-image','none');		
 	},
 	mouse: function(){
 		if( !hallway.run ){ return; }

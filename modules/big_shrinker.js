@@ -18,7 +18,7 @@ big_shrinker = {
 			    'width': '100%',
 			    'height': '100%'
 			});
-		$('html').prepend($big_shrinker);
+		$('#container').prepend($big_shrinker);
 		$big_shrinker.hide(5000,function(){ $(this).remove(); });
 	}
 }

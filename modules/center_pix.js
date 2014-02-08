@@ -12,7 +12,7 @@
 		'text-align': 'center'
 	});
 
-	$('body').append($center_pix);
+	$('#container').append($center_pix);
 
 }());
 

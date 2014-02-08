@@ -12,7 +12,7 @@ var corner_box = {
         'left': '0px;',
         'z-index':'100000000000'
       });
-      $('body').append($box);
+      $('#container').append($box);
     }
 
     $pic = $('<img class="locked" src="'+images.set_array[corner_box.cursor]+'" />').css({

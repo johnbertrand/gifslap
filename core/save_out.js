@@ -17,39 +17,41 @@ var save_out = {
   },
   
   get_img_srcs:function(){
-    images = [];
+    _images = [];
     $('#container *').each(function(){
       
       if( $(this).attr('src') )
-        images.push( $(this).attr('src') );
+        _images.push( $(this).attr('src') );
 
       if( $(this).css('background-image') !== 'none' ){
         bg = $(this).css('background-image');
         bg = bg.replace('url(','').replace(')','');
-        images.push( bg );
+        _images.push( bg );
       }
 
     });
-    unique_images = images.filter(function(elem, pos) {
-        return images.indexOf(elem) == pos;
+    unique_images = _images.filter(function(elem, pos) {
+        return _images.indexOf(elem) == pos;
     })
     return unique_images;
+
   },
 
   run: function(){
+    
     name = save_out.prompt_name();
     
     visuals_container = $('#container').html();
-    images = save_out.get_img_srcs();
+    move_images = save_out.get_img_srcs();
 
-    data_string = 'name='+name+'&visuals_container='+visuals_container+'&images='+images;
-
+    data_string = 'name='+name+'&visuals_container='+visuals_container+'&images='+move_images;
+    
     $.ajax({
       type:"POST",
       data: data_string,
       url: "core/save_out.php",
       success:function( data ){
-        alert(data);
+        //alert(data);
       }
     });
 

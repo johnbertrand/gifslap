@@ -30,8 +30,8 @@ var control_handlers = {
 	
 		//if entered and a letter is pressed
 		if( controls.entered && e.which>=65 && e.which <= 90 ){
-			keycode = e.which.toString();
-			enter_set(keycode);
+			//keycode = e.which.toString();
+			//enter_set(keycode);
 		}
 		if(e.which==16){
 			controls.shifted = true;	
@@ -264,22 +264,24 @@ var control_handlers = {
 		else if(e.which==13){ 
 			controls.entered=false;
 			
-			n = images.set_array[0].lastIndexOf("/");
-			$('#title').show(0).html(images.set_array[0].substring(5,n)).fadeOut(5000);
+			//set changer temporarily disabled
+
+			// n = images.set_array[0].lastIndexOf("/");
+			// $('#title').show(0).html(images.set_array[0].substring(5,n)).fadeOut(5000);
 			
-			$('#readout div div').remove();
-			for(var i=0; i<bg_mod.active_set.length; i++){
-				if( bg_mod.active_set[i].indexOf("!") !== -1 ){ dot_class="poppin"; }else{ dot_class="";}
-				$('#count-bgs').append('<div class="'+dot_class+'">');
-			}
-			for(var i=0; i<inner_bg_mod.active_set.length; i++){
-				if( inner_bg_mod.active_set[i].indexOf("!") !== -1 ){ dot_class="poppin"; }else{ dot_class="";}
-				$('#count-inner-bgs').append('<div class="'+dot_class+'">');
-			}
-			for(var i=0; i<images.set_array.length; i++){
-				if( images.set_array[i].indexOf("!") !== -1 ){ dot_class="poppin"; }else{ dot_class="";}
-				$('#count-images').append('<div class="'+dot_class+'">');
-			}
+			// $('#readout div div').remove();
+			// for(var i=0; i<bg_mod.active_set.length; i++){
+			// 	if( bg_mod.active_set[i].indexOf("!") !== -1 ){ dot_class="poppin"; }else{ dot_class="";}
+			// 	$('#count-bgs').append('<div class="'+dot_class+'">');
+			// }
+			// for(var i=0; i<inner_bg_mod.active_set.length; i++){
+			// 	if( inner_bg_mod.active_set[i].indexOf("!") !== -1 ){ dot_class="poppin"; }else{ dot_class="";}
+			// 	$('#count-inner-bgs').append('<div class="'+dot_class+'">');
+			// }
+			// for(var i=0; i<images.set_array.length; i++){
+			// 	if( images.set_array[i].indexOf("!") !== -1 ){ dot_class="poppin"; }else{ dot_class="";}
+			// 	$('#count-images').append('<div class="'+dot_class+'">');
+			// }
 		}
 		else if(e.which==187){ $('#plus').removeClass('active'); }
 		else if(e.which==189){ $('#minus').removeClass('active'); }

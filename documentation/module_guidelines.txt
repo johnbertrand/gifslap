@@ -1,0 +1,12 @@
+
+
+
+MODULES
+-
+
+
+Modules should be independent from eachother, and not rely on the code of other modules.
+
+They are allowed to rely on the code of the core. Specifically, many modules reference values from images{}.
+
+When a module is initialized it usually adds its own element to the DOM, so it can be manipulated independently. Modules elements should be inside #container, because #container is exported to save snapshots of the DOM.

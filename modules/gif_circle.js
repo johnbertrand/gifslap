@@ -1,5 +1,14 @@
 //CIRCLE GIFS
-var circle_container = document.getElementById('circle');
+
+
+
+
+
+var circle_container = document.createElement('div');
+circle_container.setAttribute("style","width:100%;height:100%;z-index:999999999999999;position:absolute;top:0px;");
+circle_container.setAttribute('id','circle');
+document.getElementById('container').appendChild( circle_container );
+
 var circle_imgs = circle_container.getElementsByTagName("img");
 var circle = {
 	run: false,
@@ -41,6 +50,7 @@ var circle = {
 			.attr('height',images.height)
 			.attr('width',images.width)
 			.css({
+				'position': 'absolute',
 				'opacity':images.opacity,
 				'border-radius': images.radius+"px",
 				left : perim[i][0],
@@ -114,9 +124,9 @@ var circle = {
 		circle.container_angle = circle.container_angle-circle.container_spin_speed;
 
 		// REMOVE RESIDUAL IMAGES
-		if( $('#container img').length > 0 ){
+		if( $('#container>img').length > 0 ){
 			images.remove_random();
-			if( $('#container img').length < 6){
+			if( $('#container>img').length < 6){
 	      $('#container>img').remove();
 	    }
 		}

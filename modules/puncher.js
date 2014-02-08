@@ -17,12 +17,12 @@ var puncher = {
     // else if(p_num==4){button=63}
     // Jazz.MidiOut(0x90,button,1);
     
-    $p_img = $('<img src="'+src+'" class="gif" height="'+height+'" />').css({
+    $p_img = $('<img src="'+src+'" class="gif locked" height="'+height+'" />').css({
       'top':pos_y,
       'left':pos_x,
       'z-index':'1000000000000'
     });
-    $('body').prepend( $p_img );
+    $('#container').prepend( $p_img );
     //$p_img.error(function(){ $(this).attr('src',theme_array[p_num]); });
 
     $p_img.animate({'top':5000,},5000,function(){

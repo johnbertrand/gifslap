@@ -8,6 +8,12 @@ if( !$name ){ return; }
 $dest = '../saves/'.$name;
 
 // Create destination folder
+
+if( is_dir($dest) ){
+  echo "File exists";
+  die;
+}
+
 if( mkdir($dest) ){
   echo "folder $name created";
 }

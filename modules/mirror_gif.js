@@ -28,7 +28,7 @@
 	$mirror_box.append($mirror_right);
 
 
-	$('body').append($mirror_box);
+	$('#container').append($mirror_box);
 }());
 
 m_left = 0;
