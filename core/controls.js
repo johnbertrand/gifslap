@@ -100,10 +100,10 @@ var control_handlers = {
 				chain.move_y = 0;
 				chain.move_x = 30;
 			}
-		}else if(e.which==8){//DELETE:REMOVE random LOCKED image
-			random_locked_ele=	Math.floor(Math.random()*$('.locked').length);
-			$('.locked').eq(random_locked_ele).remove();
-			return false;
+		}else if(e.which==8){//DELETE
+			
+			//cant really override default back button
+
 		}else if(e.which==91 || e.which==93){//COMMAND KEY:set BG GIF
 			
 			if(controls.shifted){
@@ -152,7 +152,9 @@ var control_handlers = {
 			}
 		
 		}else if(e.which==65){// A
-			hallway.init();
+			
+			keydown['a'] = true;
+
 		}else if(e.which==66){//B
 			big_shrinker.go();
 		}else if(e.which==67){//C
@@ -166,6 +168,8 @@ var control_handlers = {
 
 
 		}else if(e.which==68){// D
+
+			keydown['d'] = true;
 
 		}else if(e.which==69){// E
 
@@ -215,12 +219,9 @@ var control_handlers = {
 		}else if(e.which==86){// V
 
 		}else if(e.which==87){// W
-			if( controls.alted ){ images.width='auto';return }
-			mods['width'] = true;
-			images.height = $('img').eq(0).height();
-			mods['default'] = false;
-			$('#width').addClass('active');
-			$control_selector.val('Width');
+			
+			keydown['w'] = true;
+
 		}else if(e.which==89){// Y
 
 		}else if(e.which==220){// \ TOGGLE UI
@@ -235,11 +236,14 @@ var control_handlers = {
 			
 		}else if(e.which==52){//4
 
-		}else if(e.which==192){// ~ RECORD BUTTON
+		}else if(e.which==192){// ~ 
 			
+			if( controls.shifted ){
+				image_flagger.run();
+				return;
+			}
+
 			save_out.run();
-			// save_out.get_img_srcs();
-			
 			
 		}else if(e.which==54){ // 6 
 			
@@ -247,17 +251,36 @@ var control_handlers = {
 	},
 	key_up: function(e){
 		
-		if(e.which==70){ // F
+		
+		if(e.which==65){ // A
+
+			keydown['a'] = false; 
+
+		}else if(e.which==68){ // D
+
+			keydown['d'] = false; 
+
+		}else if(e.which==70){ // F
+
 			keydown['f'] = false; 
+
 		}else if(e.which==72){ mods['height'] = false; mods['default'] = true;$('#height').removeClass('active');}// Height
 		else if(e.which==79) { mods['opacity']=false; mods['default'] = true;$('#opacity').removeClass('active'); }// Opacity
 		else if(e.which==80){ // P
+
 			keydown['p'] = false; 
+
 		}
 		else if(e.which==83){ // S
+
 			keydown['s'] = false; 
+
 		}
-		else if(e.which==87) { mods['width']=false; mods['default'] = true;$('#width').removeClass('active'); }// Width
+		else if(e.which==87) { // W
+
+			keydown['w'] = false;
+			
+		}
 		else if(e.which==84) { mods['trail']=false; mods['default'] = true;$('#trail').removeClass('active'); }// Width
 		else if(e.which==16){ controls.shifted=false }
 		else if(e.which==18){ controls.alted=false; }
