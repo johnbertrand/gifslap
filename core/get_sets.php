@@ -6,6 +6,9 @@ $all_sets = array();
 //get all the gifs from all the folders.
 foreach(glob("sets/*") as $set):
 
+	//if it starts with - skip it
+	if( strpos($set,"/-") ){ continue; }	
+
 	// cut off "sets/"	
 	$set = substr($set, 5);
 	
