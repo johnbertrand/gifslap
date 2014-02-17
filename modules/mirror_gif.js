@@ -54,6 +54,8 @@ var mirror_gif={
 	},
 	draw: function(){
 
+		if(!mirror_gif.run){return;}
+
 		//Auto Rotation
 		if( images.rotation_speed > 0 ){ images.rotation = images.rotation+(images.rotation_speed*.05); }
 
@@ -65,7 +67,10 @@ var mirror_gif={
 			.css({
 				'opacity':images.opacity,
 				'-webkit-transform': 'rotate('+images.rotation+'deg)',
-				'border-radius': images.radius+"px"
+				'border-radius': images.radius+"px",
+				'position':'relative',
+				'top':'0px',
+				'left':'0px'
 			}));
 		mirror_gif.current_amount++;
 		m_left++;

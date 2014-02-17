@@ -98,6 +98,8 @@ var hallway={
 	},
 	draw: function(){
 
+		if(!hallway.run){return;}
+
 		if(midi){
 			hallway.layer.find(".hallway-bottom, .hallway-top").css({
 				"opacity":images.opacity,

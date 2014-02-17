@@ -17,17 +17,6 @@ var chain = {
 	doubler_distance: 1,
 	doubler_size: 1,
 	double_positioning: false,
-	fly_off: function(){ //this function might be able to move to images{}
-		$('img').each(function(){
-			left = $(this).css('left');
-			left = parseInt(left);
-			opacity = $(this).css('opacity');
-			$(this).css({
-				'left':left+20
-				//'opacity':opacity-.1
-			});
-		});
-	},
 	init: function(){
 		chain.run = true;
 		chain.restart = false;
@@ -43,6 +32,7 @@ var chain = {
 	},
 	draw: function(){
 
+		if(!chain.run){ return; }
 		
 		//HANDLE MOVEMENT
 		/*if(direction=="down"){ pos_y = pos_y+distance; }
@@ -199,11 +189,6 @@ var chain = {
 		
 		//REMOVE IMAGES (CLEAN UP PHASE)
 		if(chain.total_amount >= images.amount){
-
-			//Fly off function
-			if( keydown['f'] ){
-				chain.fly_off();
-			}
 
 			images.remove_random();
 			chain.total_amount--;

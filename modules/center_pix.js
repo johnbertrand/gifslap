@@ -38,6 +38,8 @@ var center_pix={
 	},
 	draw: function(){
 
+		if(!center_pix.run){ return; }
+
 		//Auto Rotation
 		if( images.rotation_speed > 0 ){ images.rotation = images.rotation+(images.rotation_speed*.05); }
 

@@ -80,6 +80,9 @@ var circle = {
 		return perim;
 	},
 	draw: function(){
+
+		if(!circle.run){ return; }
+
 		//Apply styles to every image simultaneously (rotate)
 		for (var i = 0; i < circle_imgs.length;i++) {
 		    circle.angle = circle.angle+circle.spin_speed;
