@@ -23,6 +23,7 @@ var rainbow_bars = {
 		return ("rgba("+red+","+green+","+blue+","+a+")");	
 	},
 	draw: function(){
+		if(!rainbow_bars.run){ return; }
 		if( rainbow_bars.current_size > rainbow_bars.max_size ){ 
 			rainbow_bars.bars.removeChild( document.getElementsByClassName('dirt')[0] );
 			//clearInterval(loop);

@@ -39,26 +39,27 @@
 <? } ?>
 
 <!-- CORE -->
-
 <script src="core/midi.js"></script>
 <script src="core/images.js"></script>
 <script src="core/hud.js"></script>
 <script src="core/save_out.js"></script>
+<script src="core/image_flagger.js"></script>
 
-
-<!-- MODULES -->
-
-<script src="modules/rainbow_bars.js"></script>
+<!-- MODULES --> 
 <script src="modules/gif_circle.js"></script>
-<script src="modules/bg_mod.js"></script>
-<script src="modules/inner_bg_mod.js"></script>
-<script src="modules/big_shrinker.js"></script>
 <script src="modules/chain.js"></script>
 <script src="modules/mirror_gif.js"></script>
 <script src="modules/center_pix.js"></script>
 <script src="modules/hallway.js"></script>
-<script src="modules/puncher.js"></script>
-<script src="modules/corner_box.js"></script>
+
+<!-- ADDONS -->
+<script src="addons/rainbow_bars.js"></script>
+<script src="addons/inner_bg_mod.js"></script>
+<script src="addons/bg_mod.js"></script>
+<script src="addons/big_shrinker.js"></script>
+<script src="addons/puncher.js"></script>
+<script src="addons/corner_box.js"></script>
+
 
 <script>
 <?
@@ -97,22 +98,11 @@ $custom_set_launch_array = array(
 	);
 ?>
 
-
-// //MODIFIERS TO ALTER THE LOOP
-// var mods = new Array();
-// mods['default'] = true;
-// mods['height'] = false;
-// mods['width'] = false;
-// mods['opacity'] = false;
-// mods['speed'] = false;
-// mods['trail'] = false;
-
 //VARIABLES
 
 images.set_array = all_gifs; //INITIAL SET.
 
 var
-	
 	run = true,
 	recording = false, //Not currently recording
 	
@@ -176,40 +166,16 @@ t=setInterval(function(){
 
 	if (run==false){return;}
 
-	//Modules that can run with simultaneously:
-
-	if(rainbow_bars.run == true){
-		rainbow_bars.draw();
-	}
+	// Addons
+	rainbow_bars.draw();
+	images.fly_off();
 	
-
-	// mutually exclusive modules (notice the return;)
-
-	if(hallway.run){
-		hallway.draw();
-		return;
-	}
-
-	if(mirror_gif.run){
-		mirror_gif.draw();
-		return;
-	}
-
-	if(center_pix.run){
-		center_pix.draw();
-		return;
-	}
-	
-	
-	if(circle.run){
-		circle.draw();
-		return;
-	}
-
-	if(chain.run){
-		chain.draw();
-		return;
-	}
+	// Modules
+	hallway.draw();
+	mirror_gif.draw();
+	center_pix.draw();
+	circle.draw();	
+	chain.draw();
 	
 },35);
 
@@ -264,20 +230,6 @@ toggle_value=function(control){
 	}
 };
 
-// var corner_pic_num = 0;
-// var corner_pic = function(){
-
-// 	$corner_pic = $('<img src="'+punches[corner_pic_num]+'" />');
-// 	$('#corner-pic').toggleClass('hidden').html($corner_pic);
-// 	if( $('#corner-pic').hasClass('hidden') ){ return; }
-// 	if(corner_pic_num >= punches.length-1){ 
-// 		corner_pic_num=0; 
-// 	}else{
-// 		corner_pic_num++;
-// 	}
-// }
-
-
 var shrink_images = function(){
 	$('img').animate({"height":"0px","width":"0px"},2000);
 }
@@ -322,23 +274,6 @@ var enter_set = function(which_key){
 </script>
 
 <script src="core/controls.js"></script>
-<script src="modules/module_changer.js"></script>
+<script src="core/module_changer.js"></script>
 </body>
 </html>
-<!--
-
-Big Features to Add:
-- Second screen HUD
-- AutoVJ mode
-- Robust recording, playback
-- DOM unpacker, for saving digital posters. deletes empty nodes and finally deletes all JS
-
-Modules to Add
-- Audio reaction
-- waveform generator
-- ASCII Art module: text writer, art displayer
-
-Module Improvements:
-- background size support in hallway
-
--->
