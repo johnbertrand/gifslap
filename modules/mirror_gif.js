@@ -59,8 +59,7 @@ var mirror_gif={
 		//Auto Rotation
 		if( images.rotation_speed > 0 ){ images.rotation = images.rotation+(images.rotation_speed*.05); }
 
-		mirror_gif.boxes.prepend(
-		$('<img />')
+		$add_image = $('<img />')
 			.attr("src",images.set_array[chain.cursor])
 			.attr('height',images.height)
 			.attr('width',images.width)
@@ -71,7 +70,17 @@ var mirror_gif={
 				'position':'relative',
 				'top':'0px',
 				'left':'0px'
-			}));
+			});
+
+		if( images.border_image ){
+			$add_image.css({
+				'border-width':images.border_width,
+				'border-image':'url('+images.set_array[chain.cursor+1]+') 48% repeat',
+				"border-image-slice":images.border_slice+"%"
+			});
+		}
+
+		mirror_gif.boxes.prepend( $add_image );
 		mirror_gif.current_amount++;
 		m_left++;
 

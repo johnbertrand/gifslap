@@ -48,7 +48,6 @@ $index_data =
 <head>
   <title>.gifSlap</title>
   <link rel=\"stylesheet\" href=\"../../core/assets/style.css\" />
-  <script type=\"text/javascript\" src=\"../../core/assets/jquery-1.9.1.min.js\"></script>
 </head>
 <body>
 <div id='container'>";

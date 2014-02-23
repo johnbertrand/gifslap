@@ -8,7 +8,9 @@
 		'width': '100%',
 		'z-index': '-1',
 		'left': '0px',
-		'top': '0px'
+		'top': '0px',
+		'background-position-y':'0px',
+		'background-position-x':'0px'
 	});
 
 	$('#container').append($bg_box);
@@ -52,5 +54,34 @@ var bg_mod = {
 	},
 	set: function(url){
 		bg_mod.box.css('background-image','url('+url+')');	
+	},
+
+	vscrolling_speed: 0,
+	vscroll_invert: false,
+	vscroll: function(){		
+		if(bg_mod.vscrolling_speed > 0){ 
+			vpos = bg_mod.box.css("background-position-y");
+			vpos = parseInt(vpos);
+			if( bg_mod.vscroll_invert ){
+				bg_mod.box.css("background-position-y",vpos-bg_mod.vscrolling_speed+"px");
+			}else{
+				bg_mod.box.css("background-position-y",vpos+bg_mod.vscrolling_speed+"px");
+			}
+		}
+	},
+
+	hscrolling_speed: 0,
+	hscroll_invert: false,
+	hscroll: function(){		
+		if(bg_mod.hscrolling_speed > 0){ 
+			hpos = bg_mod.box.css("background-position-x");
+			hpos = parseInt(hpos);
+			if( bg_mod.hscroll_invert ){
+				bg_mod.box.css("background-position-x",hpos-bg_mod.hscrolling_speed+"px");
+			}else{
+				bg_mod.box.css("background-position-x",hpos+bg_mod.hscrolling_speed+"px");
+			}
+		}
 	}
+
 }

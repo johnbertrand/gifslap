@@ -126,6 +126,14 @@ var hallway={
 			'-webkit-perspective-origin-x':hallway.origin_x*200+"%",
 			'-webkit-perspective-origin-y':hallway.origin_y*200+"%"
 		});
+
+		if( images.border_image ){
+			new_layer.css({
+				'border-width':images.border_width,
+				'border-image':'url('+images.set_array[chain.cursor+1]+') 48% repeat',
+				"border-image-slice":images.border_slice+"%"
+			});
+		}
 		
 		
 

@@ -107,8 +107,8 @@ var chain = {
 		}
 
 		//ADD THE NEW IMAGE!
-		$container.prepend(
-			$('<img />')
+
+		$add_image = $('<img />')
 			.attr("src",images.set_array[chain.cursor])
 			.attr("class","gif")
 			.attr('height',current_height)
@@ -122,7 +122,18 @@ var chain = {
 				'opacity':images.opacity,
 				'-webkit-transform': 'rotate('+images.rotation+'deg)',
 				'border-radius': images.radius+"px"
-			}));
+			});
+
+		if( images.border_image ){
+			$add_image.css({
+				'border-width':images.border_width,
+				'border-image':'url('+images.set_array[chain.cursor+1]+') 48% repeat',
+				"border-image-slice":images.border_slice+"%"
+			});
+		}
+
+
+		$container.prepend( $add_image );
 			
 		if( chain.doubler ){
 			chain.doubler_y = chain.pos_y+chain.doubler_top;

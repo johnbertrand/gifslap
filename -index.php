@@ -51,6 +51,7 @@
 <script src="modules/mirror_gif.js"></script>
 <script src="modules/center_pix.js"></script>
 <script src="modules/hallway.js"></script>
+<!-- <script src="modules/kscope.js"></script> -->
 
 <!-- ADDONS -->
 <script src="addons/rainbow_bars.js"></script>
@@ -59,6 +60,7 @@
 <script src="addons/big_shrinker.js"></script>
 <script src="addons/puncher.js"></script>
 <script src="addons/corner_box.js"></script>
+<!-- <script src="addons/border_pic.js"></script> -->
 
 
 <script>
@@ -169,6 +171,8 @@ t=setInterval(function(){
 	// Addons
 	rainbow_bars.draw();
 	images.fly_off();
+	bg_mod.vscroll();
+	bg_mod.hscroll();
 	
 	// Modules
 	hallway.draw();
@@ -176,6 +180,7 @@ t=setInterval(function(){
 	center_pix.draw();
 	circle.draw();	
 	chain.draw();
+	// kscope.draw();
 	
 },35);
 

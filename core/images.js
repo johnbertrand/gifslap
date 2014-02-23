@@ -1,4 +1,5 @@
 var images = {
+  set_array: new Array(),
 	height: 500,
 	width: "auto",
 	opacity: 1,
@@ -6,11 +7,13 @@ var images = {
 	rotation: 0,
   rotation_speed: 0,
   randomize_order: true,
+  border_image: false,
+  border_width: 50,
+  border_slice: 48,
   amount: 10, //amount allowed in chain
   auto_height: false,
   auto_height_steps: 8,
   auto_height_cursor: 0,
-  set_array: new Array(),
   fly_off_dist: 20,
   fly_off: function(){
 

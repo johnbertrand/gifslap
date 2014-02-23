@@ -260,7 +260,14 @@ if(midi){
 			* * * * * * * * * * * * */
 
 			if(a[2]==0){ a[2]=1; }
-			$('#bg-box').css({"background-size": a[2]+"%"})
+
+			a[2] = a[2]+"%";
+
+			if(a[2]=="127%"){ a[2]="cover"; }
+
+			$('#bg-box').css({"background-size": a[2]})
+			$('.kscope-box').css({"background-size": a[2]})
+
 
 		}else if(a[0]==176&&a[1]==16){ //slider 4
 
@@ -274,11 +281,44 @@ if(midi){
 
 		}else if(a[0]==176&&a[1]==20){ //slider 5
 
+			/* * * * * * * * * * * * * 
+			*                        *
+			* BORDER IMAGE WIDTH     *
+			* * * * * * * * * * * * */
+
+			if( a[2] == 0 ){ 
+				images.border_image = false;
+			}else{
+				images.border_image = true;	
+			}
+			images.border_width = a[2];
+
 		}else if(a[0]==176&&a[1]==24){ //slider 6
+
+			/* * * * * * * * * * * * * 
+			*                        *
+			* BORDER IMAGE SLICE     *
+			* * * * * * * * * * * * */
+			if( a[2] == 0 ){ 
+				images.border_image = false;
+			}else{
+				images.border_image = true;
+				if(images.border_width == 0){
+					images.border_width = 20;
+				}
+			}
+			images.border_slice = a[2];
 
 		}else if(a[0]==176&&a[1]==28){ //slider 7
 
 		}else if(a[0]==176&&a[1]==32){ //slider 8
+
+			/* * * * * * * * * * * * * * * *
+			*                              *
+			* FLY OFF DISTANCE             *
+			* * * * * * * * * * * * * * * */
+
+			images.fly_off_dist = a[2];
 
 		}else if(a[0]==176&&a[1]==48){ //encoder spin 1
 
@@ -308,7 +348,21 @@ if(midi){
 
 		}else if(a[0]==176&&a[1]==55){ //encoder spin 7
 
+			/* * * * * * * * * * * * * 
+			*                        *
+			* BG HSCROLL             *
+			* * * * * * * * * * * * */
+
+			bg_mod.hscrolling_speed=a[2]*.5;
+
 		}else if(a[0]==176&&a[1]==58){ //encoder spin 8
+			
+			/* * * * * * * * * * * * * 
+			*                        *
+			* BG VSCROLL             *
+			* * * * * * * * * * * * */
+
+			bg_mod.vscrolling_speed=a[2]*.5;
 
 		}else if(a[0]==176&&a[1]==50){ //encoder spin 9
 
@@ -388,7 +442,21 @@ if(midi){
 
 		}else if(a[0]==144&&a[1]==55&&a[2]>0){ //encoder press 7
 
+			/* * * * * * * * * * * *  * 
+			*                         *
+			* BG HSCROLL INVERT       *
+			* * * * * * * * * * * * * */
+
+			bg_mod.hscroll_invert = !bg_mod.hscroll_invert;
+
 		}else if(a[0]==144&&a[1]==58&&a[2]>0){ //encoder press 8
+
+			/* * * * * * * * * * * *  * 
+			*                         *
+			* BG VSCROLL INVERT       *
+			* * * * * * * * * * * * * */
+
+			bg_mod.vscroll_invert = !bg_mod.vscroll_invert;
 
 		}else if(a[0]==144&&a[1]==50&&a[2]>0){ //encoder press 9
 

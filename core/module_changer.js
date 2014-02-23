@@ -5,6 +5,7 @@ module_changer = {
 	current: 0,
 	functions: new Array(
 		chain.init,
+		// kscope.init,
 		hallway.init,
 		circle.init,
 		mirror_gif.init
@@ -16,6 +17,7 @@ module_changer = {
 		hallway.clear();
 		circle.run = false;
 		mirror_gif.clear();
+		// kscope.die();
 		//center_pix.run = false;
 	},
 	step: function(){
