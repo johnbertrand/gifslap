@@ -1,3 +1,0 @@
-var set_changer = {
-  
-}

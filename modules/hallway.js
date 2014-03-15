@@ -23,6 +23,7 @@ var hallway={
 	midi_y: .25,
 	top_bottom_rotation: 0,
 	sides_rotation: 0,
+	layer_rot: 0,
 	init: function(){
 		hallway.run = !hallway.run;
 
@@ -124,7 +125,8 @@ var hallway={
 			'opacity':'1',
 			'-webkit-perspective': hallway.perspective,
 			'-webkit-perspective-origin-x':hallway.origin_x*200+"%",
-			'-webkit-perspective-origin-y':hallway.origin_y*200+"%"
+			'-webkit-perspective-origin-y':hallway.origin_y*200+"%",
+			'-webkit-transform': 'rotate('+hallway.layer_rot+'deg)'
 		});
 
 		if( images.border_image ){

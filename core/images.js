@@ -69,6 +69,12 @@ var images = {
         _images.push( bg );
       }
 
+      if( $(this).css('border-image') !== 'none' ){
+        _border_img = $(this).css('border-image');
+        _border_img = _border_img.replace('url(','').replace(')','');
+        _images.push( _border_img );
+      }
+
     });
     unique_images = _images.filter(function(elem, pos) {
         return _images.indexOf(elem) == pos;

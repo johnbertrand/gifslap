@@ -36,7 +36,9 @@ var control_handlers = {
 		if(e.which==16){
 			controls.shifted = true;	
 		}else if(e.which==13){// ENTER
+
 			controls.entered = true;
+			
 		}else if(e.which==18){// ALT
 			controls.alted = true;
 		}else if(e.which==37){ // LEFT KEY

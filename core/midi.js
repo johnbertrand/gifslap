@@ -311,6 +311,8 @@ if(midi){
 
 		}else if(a[0]==176&&a[1]==28){ //slider 7
 
+			hallway.layer_rot = a[2];
+
 		}else if(a[0]==176&&a[1]==32){ //slider 8
 
 			/* * * * * * * * * * * * * * * *
