@@ -30,14 +30,15 @@ var control_handlers = {
 	
 		//if entered and a letter is pressed
 		if( controls.entered && e.which>=65 && e.which <= 90 ){
-			//keycode = e.which.toString();
-			//enter_set(keycode);
+			keycode = e.which;
+			switch_sets(keycode);
 		}
 		if(e.which==16){
 			controls.shifted = true;	
 		}else if(e.which==13){// ENTER
 
 			controls.entered = true;
+			hud.show();
 			
 		}else if(e.which==18){// ALT
 			controls.alted = true;
@@ -183,9 +184,9 @@ var control_handlers = {
 
 		}else if(e.which==72){// Height
 			if( controls.alted ){ height='auto';return }
-			mods['height'] = true;
+			
 			images.width = $('img').eq(0).width();
-			mods['default']=false;
+			
 			$('#height').addClass('active');
 			$control_selector.val('Height');
 		}else if(e.which==73){// I
@@ -197,8 +198,8 @@ var control_handlers = {
 		}else if(e.which==78){// N
 
 		}else if(e.which==79){// O
-			mods['opacity'] = true;
-			mods['default'] = false;
+			
+			
 			$('#opacity').addClass('active');
 			$control_selector.val('Opacity');
 		
@@ -266,9 +267,11 @@ var control_handlers = {
 
 			keydown['f'] = false; 
 
-		}else if(e.which==72){ mods['height'] = false; mods['default'] = true;$('#height').removeClass('active');}// Height
-		else if(e.which==79) { mods['opacity']=false; mods['default'] = true;$('#opacity').removeClass('active'); }// Opacity
-		else if(e.which==80){ // P
+		}else if(e.which==72){ // H
+
+		}else if(e.which==79){ // O
+
+		}else if(e.which==80){ // P
 
 			keydown['p'] = false; 
 
@@ -283,30 +286,13 @@ var control_handlers = {
 			keydown['w'] = false;
 			
 		}
-		else if(e.which==84) { mods['trail']=false; mods['default'] = true;$('#trail').removeClass('active'); }// Width
-		else if(e.which==16){ controls.shifted=false }
+		else if(e.which==84){
+
+		}else if(e.which==16){ controls.shifted=false }
 		else if(e.which==18){ controls.alted=false; }
 		else if(e.which==13){ 
 			controls.entered=false;
-			
-			//set changer temporarily disabled
-
-			// n = images.set_array[0].lastIndexOf("/");
-			// $('#title').show(0).html(images.set_array[0].substring(5,n)).fadeOut(5000);
-			
-			// $('#readout div div').remove();
-			// for(var i=0; i<bg_mod.active_set.length; i++){
-			// 	if( bg_mod.active_set[i].indexOf("!") !== -1 ){ dot_class="poppin"; }else{ dot_class="";}
-			// 	$('#count-bgs').append('<div class="'+dot_class+'">');
-			// }
-			// for(var i=0; i<inner_bg_mod.active_set.length; i++){
-			// 	if( inner_bg_mod.active_set[i].indexOf("!") !== -1 ){ dot_class="poppin"; }else{ dot_class="";}
-			// 	$('#count-inner-bgs').append('<div class="'+dot_class+'">');
-			// }
-			// for(var i=0; i<images.set_array.length; i++){
-			// 	if( images.set_array[i].indexOf("!") !== -1 ){ dot_class="poppin"; }else{ dot_class="";}
-			// 	$('#count-images').append('<div class="'+dot_class+'">');
-			// }
+			hud.hide();
 		}
 		else if(e.which==187){ $('#plus').removeClass('active'); }
 		else if(e.which==189){ $('#minus').removeClass('active'); }

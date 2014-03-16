@@ -3,7 +3,6 @@ var chain = {
 	restart: false,
 	cursor: 0,
 	amount: 0, //THE AMOUNT OF IMAGES SHOWN FROM THE CURRENT CHAIN, ALSO USED FOR Z-INDEX
-	total_amount: 0, //THE TOTAL AMOUNT OF ONSCREEN IMAGES (possibly deprecated)
 	pos_x: 500,
 	pos_y: 100,
 	move_x: 0,
@@ -47,7 +46,6 @@ var chain = {
 
 
 		chain.amount++;
-		chain.total_amount++;
 		chain.z++;
 
 		chain.pos_x = chain.pos_x + (chain.move_x*chain.distance);
@@ -110,7 +108,7 @@ var chain = {
 
 		$add_image = $('<img />')
 			.attr("src",images.set_array[chain.cursor])
-			.attr("class","gif")
+			.attr("class","gif chain")
 			.attr('height',current_height)
 			.attr('data-orig-height',images.height)
 			.attr('width',images.width)
@@ -164,7 +162,6 @@ var chain = {
 				}));
 				
 		chain.amount++;
-		chain.total_amount++;
 		}
 		
 		
@@ -199,13 +196,13 @@ var chain = {
 		*/
 		
 		//REMOVE IMAGES (CLEAN UP PHASE)
-		if(chain.total_amount >= images.amount){
+		if(chain.amount >= images.amount){
 
 			images.remove_random();
-			chain.total_amount--;
-			if(chain.doubler || chain.total_amount > 100 ){ //run it again
+			chain.amount--;
+			if(chain.doubler || chain.amount > 100 ){ //run it again
 				images.remove_random();
-				chain.total_amount--;
+				chain.amount--;
 			}
 		}
 

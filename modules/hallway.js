@@ -11,6 +11,9 @@ var hallway={
 	refresh_pics: false,
 	layers: 5,
 	layer: null, //is filled in with init()
+	layer_rot: 0,
+	layer_auto_rot: 0,
+	layer_width: 100,
 	perspective: 250,
 	box: $('#hallway'),
 	initialized: false,
@@ -23,12 +26,12 @@ var hallway={
 	midi_y: .25,
 	top_bottom_rotation: 0,
 	sides_rotation: 0,
-	layer_rot: 0,
+
 	init: function(){
 		hallway.run = !hallway.run;
 
 		if(hallway.run){
-			//if(midi){ m_out(48,'127'); }
+			if(midi){ m_out(48,'127'); }
 			images.clear();
 
 			if( hallway.initialized==true ){ return; }
@@ -44,15 +47,14 @@ var hallway={
 				'position': 'absolute',
 				'z-index': '0',
 				'-webkit-perspective': hallway.perspective,
-		        '-webkit-perspective-origin-x': '50%',
-		        '-webkit-perspective-origin-y': '50%'
+        '-webkit-perspective-origin-x': '50%',
+        '-webkit-perspective-origin-y': '50%'
 			});
 			$top = $('<div class="hallway-top"></div>').css({
 				'width': '100%',
 				'height': '20%',
 				'margin': '0px auto',
-				'-webkit-transform': 'rotateX(-63deg)',
-				'position': 'absolute'
+				'-webkit-transform': 'rotateX(-63deg)'
 			});
 			$left = $('<div class="hallway-left"></div>').css({
 				'float':'left',
@@ -84,7 +86,7 @@ var hallway={
 			
 
 		}else{
-			//if(midi){ m_out(48,'off'); }
+			if(midi){ m_out(48,'off'); }
 		}
 	},
 	clear: function(){
@@ -100,6 +102,8 @@ var hallway={
 	draw: function(){
 
 		if(!hallway.run){return;}
+
+		hallway.sides_rotation = hallway.sides_rotation + hallway.layer_auto_rot;
 
 		if(midi){
 			hallway.layer.find(".hallway-bottom, .hallway-top").css({
@@ -120,6 +124,10 @@ var hallway={
 		if( controls.alted ){
 			hallway.perspective = 250;
 		}
+
+		new_layer.find(".hallway-bottom, .hallway-top").css({
+			'width':hallway.layer_width+"%"
+		})
 
 		new_layer.css({
 			'opacity':'1',

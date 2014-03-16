@@ -249,7 +249,11 @@ if(midi){
 			* * * * * * * * * * * * */
 
 			//a[2]= Math.floor(a[2]/3);
-			if(a[2]<images.amount){$('img').eq(a[2]).nextAll('img').not('.locked .circle').remove();}
+			if( a[2] < images.amount ){ // we need to remove images
+				$('.chain').eq(a[2]).nextAll('.chain').remove();
+				chain.amount=a[2];
+			}
+			
 			images.amount=a[2];
 
 		}else if(a[0]==176&&a[1]==12){ //slider 3
@@ -311,7 +315,13 @@ if(midi){
 
 		}else if(a[0]==176&&a[1]==28){ //slider 7
 
-			hallway.layer_rot = a[2];
+			/* * * * * * * * * * * * * 
+			*                        *
+			* HALLWAY WIDTH          *
+			* * * * * * * * * * * * */
+
+			hallway.layer_width = a[2];
+			//hallway.layer_rot = a[2];
 
 		}else if(a[0]==176&&a[1]==32){ //slider 8
 
@@ -323,6 +333,13 @@ if(midi){
 			images.fly_off_dist = a[2];
 
 		}else if(a[0]==176&&a[1]==48){ //encoder spin 1
+			
+			/* * * * * * * * * * * * * * *
+			*                            *
+			* HALLWAY AUTO ROT SPEED     *
+			* * * * * * * * * * * * * * */
+
+			hallway.layer_auto_rot = (a[2]-64)*.5;
 
 		}else if(a[0]==176&&a[1]==51){ //encoder spin 2
 
@@ -404,12 +421,16 @@ if(midi){
 
 		}if(a[0]==144&&a[1]==48&&a[2]>0){ //encoder press 1
 
-			/* * * * * * * * * * * *  * 
-			*                         *
-			* TOGGLE HALLWAY          *
-			* * * * * * * * * * * * * */
+			/* * * * * * * * * * * * * * * * * * * * * * * 
+			*                                            * 
+			* TOGGLE HALLWAY AUTOROT, OR INIT HALLWAY    *
+			* * * * * * * * * * * * * * * * * * * * * * */
 
-			hallway.init();
+			if(!hallway.run){
+				hallway.init();
+			}else{
+				hallway.layer_auto_rot = 0;
+			}
 
 		}else if(a[0]==144&&a[1]==51&&a[2]>0){ //encoder press 2
 
