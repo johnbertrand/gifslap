@@ -1,5 +1,6 @@
 var images = {
-  set_array: new Array(),
+  active_set: sets.all_gifs, // This is the default set when you start
+  set_array: null, // this is declared after the object is fully declared
 	height: 500,
 	width: "auto",
 	opacity: 1,
@@ -72,6 +73,7 @@ var images = {
       if( $(this).css('border-image') !== 'none' ){
         _border_img = $(this).css('border-image');
         _border_img = _border_img.replace('url(','').replace(')','');
+        alert(_border_img);
         _images.push( _border_img );
       }
 
@@ -89,9 +91,18 @@ var images = {
   },
   clear: function(){
     $('img').remove();
+    chain.amount = 0;
   },
   rotate_all: function(degrees){
     images.rotation = images.rotation + degrees;
     $('img').css({'-webkit-transform': 'rotate('+(-1*images.rotation)+'deg) scaleX(-1)'});
   }
 }
+
+images.set_array = images.active_set.main;
+
+//Shuffle Set if random
+if( images.randomize_order ){
+  shuffle_array( images.set_array );
+}
+

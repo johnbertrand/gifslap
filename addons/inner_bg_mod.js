@@ -22,14 +22,34 @@ var inner_bg_mod = {
 
 	box: $('#inner-bg-box'),
 
-	//CLEAR THE BG
+	//CLEAR THE INNER BG
 	clear: function(){
 		inner_bg_mod.box.css('opacity','0')
 	},
 
-	//SHOW THE BG
+	//SHOW THE INNER BG
 	show: function(){
 		inner_bg_mod.box.css('opacity','1')
+	},
+
+	// RESET (when switching sets)
+	reset: function(){
+		inner_bg_mod.clear();
+		inner_bg_mod.cursor = 0;
+
+		// Sync with active set
+		if( images.active_set.inner ){
+			inner_bg_mod.active_set = images.active_set.inner;
+		}else{
+			inner_bg_mod.active_set = images.active_set.main.slice(0);
+			console.log('--> No inner bgs set folder')
+		}
+
+		//Shuffle Inner BG Set if random
+		if( images.randomize_order ){
+		  shuffle_array(inner_bg_mod.active_set);
+		}
+
 	},
 
 	//GO TO THE NEXT IMAGE
@@ -51,3 +71,4 @@ var inner_bg_mod = {
 	}
 }
 
+inner_bg_mod.reset();

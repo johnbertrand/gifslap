@@ -1,20 +1,18 @@
 
-// Setup commands
 
-(function(){
-	$bg_box = $("<div id='bg-box'></div>").css({
-		'position': 'absolute',
-		'height': '100%',
-		'width': '100%',
-		'z-index': '-1',
-		'left': '0px',
-		'top': '0px',
-		'background-position-y':'0px',
-		'background-position-x':'0px'
-	});
+// add the BG Box to the DOM
+$bg_box = $("<div id='bg-box'></div>").css({
+	'position': 'absolute',
+	'height': '100%',
+	'width': '100%',
+	'z-index': '-1',
+	'left': '0px',
+	'top': '0px',
+	'background-position-y':'0px',
+	'background-position-x':'0px'
+});
 
-	$('#container').append($bg_box);
-}());
+$('#container').append($bg_box);
 
 
 // Module properties and functions
@@ -33,6 +31,30 @@ var bg_mod = {
 	//SHOW THE BG
 	show: function(){
 		bg_mod.box.css('opacity','1')
+	},
+
+	// RESET (when switching sets)
+	reset: function(){
+		bg_mod.clear();
+		bg_mod.cursor = 0;
+		vscrolling_speed = 0;
+		hscrolling_speed = 0;
+		bg_mod.box.css("background-position-x","0px");
+		bg_mod.box.css("background-position-y","0px");
+
+		// Sync with active set
+		if( images.active_set.bgs ){
+			bg_mod.active_set = images.active_set.bgs;
+		}else{
+			bg_mod.active_set = images.active_set.main.slice(0);
+			console.log('--> No bgs set folder')
+		}
+
+		//Shuffle BG Set if random
+		if( images.randomize_order ){
+		  shuffle_array(bg_mod.active_set);
+		}
+
 	},
 
 	//GO TO THE NEXT IMAGE
@@ -85,3 +107,7 @@ var bg_mod = {
 	}
 
 }
+
+
+
+bg_mod.reset();

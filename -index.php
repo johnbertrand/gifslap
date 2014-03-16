@@ -38,12 +38,17 @@
 	</script>
 <? } ?>
 
+<!-- PRINT ALL THE SETS FROM THE FILESYSTEM -->
+<? include('core/output_sets.php'); ?>
+
 <!-- CORE -->
-<script src="core/midi.js"></script>
+<script src="core/helpers.js"></script>
 <script src="core/images.js"></script>
+<script src="core/midi.js"></script>
 <script src="core/hud.js"></script>
 <script src="core/save_out.js"></script>
 <script src="core/image_flagger.js"></script>
+<script src="core/switch_sets.js"></script>
 
 <!-- MODULES --> 
 <script src="modules/gif_circle.js"></script>
@@ -60,49 +65,11 @@
 <script src="addons/big_shrinker.js"></script>
 <script src="addons/puncher.js"></script>
 <script src="addons/corner_box.js"></script>
-<!-- <script src="addons/border_pic.js"></script> -->
 
 
 <script>
-<?
-
-include('core/get_sets.php');
-include('core/print_sets.php');
-
-//These correspond to folders
-$custom_set_launch_array = array(
-	/*A*/ "65" => "pacifica",
-	/*B*/ "66" => "bakery_fresh",
-	/*C*/ "67" => "CBMD_MUSIC",
-	/*D*/ "68" => "does_the_mountain_dream_at_night",
-	/*E*/ "69" => "eight_bit_sf",
-	/*F*/ "70" => "flashbulb",
-	/*G*/ "71" => "deff_coast",
-	/*H*/ "72" => "gif_happy_hour",
-	/*I*/ "73" => "the_time_it_takes_a_tree_to_blink",
-	/*J*/ "74" => "",
-	/*K*/ "75" => "knights_in_cairo",
-	/*L*/ "76" => "redline",
-	/*M*/ "77" => "midnight_glide",
-	/*N*/ "78" => "new_quest_city",
-	/*O*/ "79" => "momentous",
-	/*P*/ "80" => "petra",
-	/*Q*/ "81" => "",
-	/*R*/ "82" => "rich_ddt",
-	/*S*/ "83" => "slosh_drop",
-	/*T*/ "84" => "tributary_lost",
-	/*U*/ "85" => "",
-	/*V*/ "86" => "",
-	/*W*/ "87" => "welcome_ohm",
-	/*X*/ "88" => "extent_of_the_jam",
-	/*Y*/ "89" => "not_too_shabby",
-	/*Z*/ "90" => "starpause"
-	);
-?>
 
 //VARIABLES
-
-images.set_array = all_gifs; //INITIAL SET.
 
 var
 	run = true,
@@ -142,25 +109,18 @@ $text = $('#text'),
 $inner_bg = $('#inner-bg');
 
 
-//Shuffle Array
-function shuffle_array(o) {
-	for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-	return o;
-};
 
-//Shuffle Set if random
-if(images.randomize_order){ shuffle_array( images.set_array ); }
 
 //DECLARE INITIAL BG SET. MOVE TO BG_MOD.JS
-bg_mod.active_set = all_gifs_bgs;
-if(bg_mod.active_set.length == 0){ bg_mod.active_set = images.set_array; }
-shuffle_array(bg_mod.active_set);
+// bg_mod.active_set = all_gifs_bgs;
+// if(bg_mod.active_set.length == 0){ bg_mod.active_set = images.set_array; }
+// shuffle_array(bg_mod.active_set);
 
-//DECLARE INITIAL INNER_BG SET. MOVE TO INNER_BG_MOD.JS
-inner_bg_mod.active_set = all_gifs_inner_bgs;
-if(inner_bg_mod.active_set.length == 0){ inner_bg_mod.active_set = images.set_array; }
-shuffle_array(inner_bg_mod.active_set);
-shuffle_array(inner_bg_mod.active_set);
+// //DECLARE INITIAL INNER_BG SET. MOVE TO INNER_BG_MOD.JS
+// inner_bg_mod.active_set = all_gifs_inner_bgs;
+// if(inner_bg_mod.active_set.length == 0){ inner_bg_mod.active_set = images.set_array; }
+// shuffle_array(inner_bg_mod.active_set);
+// shuffle_array(inner_bg_mod.active_set);
 
 
 //START THE LOOP!!!
