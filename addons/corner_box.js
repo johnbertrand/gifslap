@@ -1,5 +1,5 @@
 var corner_box = {
-  cursor: 0,
+  cursor: Math.floor((Math.random()*images.set_array.length)+1),
   width: 20, //percent
   toggle: function(){
     
