@@ -1,6 +1,8 @@
 
+
+
 big_shrinker = {
-	cursor: 0,
+	cursor: Math.floor((Math.random()*images.set_array.length)+1),
 	next: function(){
 		big_shrinker.cursor++;
 		if(big_shrinker.cursor == images.set_array.length){
