@@ -1,3 +1,0 @@
-var img_borders = {
-  
-}
