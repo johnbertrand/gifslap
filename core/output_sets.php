@@ -17,7 +17,7 @@ foreach(glob("sets/*") as $set):
 	//cut off "sets/"	
 	$set = substr($set, 5);
 
-	// decalre JS variable for this set
+	// declare JS variable for this set
 	echo "sets.$set = {};";
 	echo "\n";
 
@@ -34,6 +34,12 @@ foreach(glob("sets/*") as $set):
 
 			//cut off prefixes
 			$dir = basename($image_or_dir);
+
+			// If a 'scenes' folder is encountered, output those scene variables.
+			if( $dir == "scenes" ){
+				output_scenes($image_or_dir, $set);
+				continue;
+			}
 
 			echo "sets.$set.$dir = []";
 			echo "\n";

@@ -1,5 +1,6 @@
 
 
+
 // add the BG Box to the DOM
 $bg_box = $("<div id='bg-box'></div>").css({
 	'position': 'absolute',
@@ -37,8 +38,8 @@ var bg_mod = {
 	reset: function(){
 		bg_mod.clear();
 		bg_mod.cursor = 0;
-		vscrolling_speed = 0;
-		hscrolling_speed = 0;
+		bg_mod.vscrolling_speed = 0;
+		bg_mod.hscrolling_speed = 0;
 		bg_mod.box.css("background-position-x","0px");
 		bg_mod.box.css("background-position-y","0px");
 

@@ -36,6 +36,7 @@ var mirror_gif={
 	run: false,
 	current_amount: 0,
 	boxes: $('#mirror-left, #mirror-right'),
+	vertical_stream: true,
 	init: function(){
 		mirror_gif.run = !mirror_gif.run;
 
@@ -71,6 +72,13 @@ var mirror_gif={
 				'top':'0px',
 				'left':'0px'
 			});
+
+		if( mirror_gif.vertical_stream ){
+			$add_image.css({
+				'float':'left',
+				'clear':'both'
+			})
+		}
 
 		if( images.border_image ){
 			$add_image.css({

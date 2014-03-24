@@ -122,12 +122,16 @@ var control_handlers = {
 			}
 			
 		}else if(e.which==187){//+ to increase trail
-			images.amount=images.amount+1;
+			
+			images.amount++;
+
 		}else if(e.which==189){//- to decrease trail
+
 			if(images.amount==0){return;}
-			images.amount=images.amount-1;
-			random_ele=	Math.floor(Math.random()*images.amount);
-			$('img').eq(random_ele).remove();
+			images.remove_random();
+			images.amount--;
+			chain.amount--;
+
 		}else if(e.which==219){//[ to decrease rotation
 			
 			images.rotation--;	
@@ -239,13 +243,22 @@ var control_handlers = {
 			
 		}else if(e.which==52){//4
 
+		}else if(e.which==27){// ESC
+
+			// move all images onscreen to the delete folder
+			image_flagger.run();
+
 		}else if(e.which==192){// ~ 
 			
+			
+
 			if( controls.shifted ){
-				image_flagger.run();
+				// save scene instead of still
+				save_out.run(true);
 				return;
 			}
 
+			//save still
 			save_out.run();
 			
 		}else if(e.which==54){ // 6 

@@ -644,7 +644,7 @@ if(midi){
 			// }
 
 		}else if(a[0]==144&&a[1]==2&&a[2]>0){ //grid button 9
-
+			
 
 		}else if(a[0]==144&&a[1]==6&&a[2]>0){ //grid button 10
 
@@ -671,6 +671,18 @@ if(midi){
 			}
 
 		}else if(a[0]==144&&a[1]==3&&a[2]>0){ //grid button 13
+			
+			/* * * * * * * * * * * * *  * 
+			*                           *
+			* MIRROR VERTICAL STREAM    *
+			* * * * * * * * * * * * * * */
+
+			mirror_gif.vertical_stream = !mirror_gif.vertical_stream;
+			if( mirror_gif.vertical_stream ){
+				m_out(3,'cyan');
+			}else{
+				m_out(3,'white');
+			}
 
 		}else if(a[0]==144&&a[1]==7&&a[2]>0){ //grid button 14
 
@@ -1012,12 +1024,13 @@ if(midi){
 	m_out(0,'white');
 	m_out(1,'white');
 	m_out(2,'off');
+	m_out(3,'white');
 	m_out(4,'white');
 	m_out(5,'white');
 	m_out(6,'off');
 	m_out(7,'off');
 	// m_out(8,'green');
-	// m_out(9,'green');
+	m_out(9,'off');
 	m_out(10,'white');
 	// m_out(11,'red');
 	// m_out(12,'green'); 

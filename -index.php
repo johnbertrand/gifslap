@@ -38,17 +38,21 @@
 	</script>
 <? } ?>
 
-<!-- PRINT ALL THE SETS FROM THE FILESYSTEM -->
+
+
+<!-- PRINT ALL THE SETS & SCENES FROM THE FILESYSTEM -->
+<? include('core/output_scenes.php'); ?>
 <? include('core/output_sets.php'); ?>
 
 <!-- CORE -->
 <script src="core/helpers.js"></script>
 <script src="core/images.js"></script>
 <script src="core/midi.js"></script>
+<script src="core/switch_sets.js"></script>
 <script src="core/hud.js"></script>
 <script src="core/save_out.js"></script>
 <script src="core/image_flagger.js"></script>
-<script src="core/switch_sets.js"></script>
+
 
 <!-- MODULES --> 
 <script src="modules/gif_circle.js"></script>
