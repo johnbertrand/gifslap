@@ -1,6 +1,9 @@
+
+
 var corner_box = {
+  set_array: images.active_set.punches,
   cursor: Math.floor((Math.random()*images.set_array.length)+1),
-  width: 20, //percent
+  width: 30, //percent
   toggle: function(){
     
     //instantiate the box
@@ -15,14 +18,14 @@ var corner_box = {
       $('#container').append($box);
     }
 
-    $pic = $('<img class="locked" src="'+images.set_array[corner_box.cursor]+'" />').css({
+    $pic = $('<img class="locked" src="'+corner_box.set_array[corner_box.cursor]+'" />').css({
       'width':"100%"
     });
 
     $('#corner-box').toggleClass('hidden').html($pic);
     if( $('#corner-box').hasClass('hidden') ){ return; }
 
-    if(corner_box.cursor >= images.set_array.length-1){ 
+    if(corner_box.cursor >= corner_box.set_array.length-1){ 
       corner_box.cursor=0; 
     }else{
       corner_box.cursor++;

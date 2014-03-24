@@ -1,10 +1,11 @@
 var puncher = {
+  set_array: images.active_set.punches,
   fade_time: 1000,
   punch: function(index){
     
     if(!index){index=0;}
 
-    src=images.set_array[index];
+    src=puncher.set_array[index];
   
     pos_y=Math.floor(Math.random()*window.innerHeight);
     pos_x=Math.floor(Math.random()*window.innerWidth);
