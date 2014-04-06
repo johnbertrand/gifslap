@@ -13,12 +13,7 @@
 <div id="text"></div>
 
 <!-- MODULES ADD ELEMENTS TO #CONTAINER: -->
-<div id="container">
-	<h1 id="title"></h1>
-	<div id="midi-info"></div>
-	<div id="map"></div>
-	<div id="inner-bg"></div>
-</div>
+<div id="container"></div>
 
 <div id="readout">
 	<div id="count-bgs"></div>
