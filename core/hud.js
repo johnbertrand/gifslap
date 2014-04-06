@@ -22,12 +22,34 @@
   });
 
   set_list.forEach(function(set) {
-      set_title = sets_helper.get_name(set);
-      if( !set_title ){ set_title = ""; }
+      if( set == null ){
+        set_title = ""; 
+      }else{
+        set = set[0];
+        set_title = sets_helper.get_name(set);
+      }
+      
+      
       $set_list_element.append($("<li>"+set_title+"</li>"));
   });
 
   $hud.append($set_list_element);
+
+  $scene_list_element = $('<ul id="hud-scenes"></div>').css({
+    'list-style-type':'upper-latin',
+    'color':'#fff',
+    'text-align':'left',
+    'float':'left',
+    'padding':'10px 10px 10px 20px',
+    'background-color':'black'
+    // 'display':'none'
+  });
+
+  scenes_helper.scenes_for_set.forEach(function(scene_title){
+      $scene_list_element.append($("<li>"+scene_title+"</li>"));
+  });
+
+  $hud.append($scene_list_element);  
 
   $preview_box = $('<div id="preview-box"></div>').css({
     'background-color':'black',
@@ -40,7 +62,7 @@
 
   $hud.append($preview_box);
 
-  $('#container').append($hud);
+  $('body').append($hud);
 
 }());
 
@@ -48,6 +70,8 @@ var hud = {
   visible: false,
   preview: false,
   preview_box: $('#preview-box'),
+
+  // Main HUD operations
   show: function(){
     if( !hud.visible ){
       //hud.draw();
@@ -60,9 +84,10 @@ var hud = {
     $('#hud').css("display","none");
     hud.visible = false;
   },
+
   show_preview: function(){
 
-    images_preview_cursor = chain.cursor+1;
+    images_preview_cursor = images.cursor+1;
     bgs_preview_cursor = bg_mod.cursor;
     inner_bgs_preview_cursor = inner_bg_mod.cursor;
 

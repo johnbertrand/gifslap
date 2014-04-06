@@ -1,9 +1,5 @@
 //CIRCLE GIFS
 
-
-
-
-
 var circle_container = document.createElement('div');
 circle_container.setAttribute("style","width:100%;height:100%;z-index:999999999999999;position:absolute;top:0px;");
 circle_container.setAttribute('id','circle');
@@ -46,7 +42,7 @@ var circle = {
 			if( i == perim.length || !circle.run ){ clearInterval( circle_draw ); return; }
 			circle_pic = $("<img />")
 			.attr('class','circle')
-			.attr('src',images.set_array[chain.cursor])
+			.attr('src',images.set_array[images.cursor])
 			.attr('height',images.height)
 			.attr('width',images.width)
 			.css({
@@ -96,7 +92,7 @@ var circle = {
 		}
 
 		if( circle.refresh ){
-			$( circle_imgs[circle.refresh_cursor] ).attr('src',images.set_array[chain.cursor]);
+			$( circle_imgs[circle.refresh_cursor] ).attr('src',images.set_array[images.cursor]);
 			
 			circle.refresh_cursor++;
 
@@ -109,7 +105,7 @@ var circle = {
 
 		if( !circle.size_lock ){
 			$(circle_imgs[circle.cursor])
-			//.attr( 'src', images.set_array[chain.cursor] )
+			//.attr( 'src', images.set_array[images.cursor] )
 			.attr('height',images.height)
 			.attr('width',images.width)
 			.css({

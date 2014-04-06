@@ -29,8 +29,8 @@ var kscope = {
     while(i<4){
       $kscope_square = $("<div class='kscope-box'></div>")
       .css({
-        'border-image':'url('+images.set_array[chain.cursor+i]+') 48% repeat',
-        'background-image':'url('+images.set_array[chain.cursor+i+1]+')',
+        'border-image':'url('+images.set_array[images.cursor+i]+') 48% repeat',
+        'background-image':'url('+images.set_array[images.cursor+i+1]+')',
         'background-size':'cover',
         'width':'50%',
         'height':'50%',
@@ -44,10 +44,10 @@ var kscope = {
   },
   draw: function(){
     if( !kscope.run ){ return; }
-    if( chain.cursor !== kscope.current_cursor ){
+    if( images.cursor !== kscope.current_cursor ){
       kscope.box.empty();
       kscope.set_boxes();
-      kscope.current_cursor = chain.cursor;
+      kscope.current_cursor = images.cursor;
     }
 
     $('.kscope-box').css({

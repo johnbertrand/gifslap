@@ -31,17 +31,26 @@ var control_handlers = {
 		//if entered and a letter is pressed
 		if( controls.entered && e.which>=65 && e.which <= 90 ){
 			keycode = e.which;
-			switch_sets(keycode);
+
+			if( controls.shifted ){
+				scenes_helper.activate_scene(keycode);
+			}else{
+				switch_sets(keycode);				
+			}
 		}
-		if(e.which==16){
+		if(e.which==16){ // SHIFT
+
 			controls.shifted = true;	
+
 		}else if(e.which==13){// ENTER
 
 			controls.entered = true;
 			hud.show();
 			
 		}else if(e.which==18){// ALT
+
 			controls.alted = true;
+
 		}else if(e.which==37){ // LEFT KEY
 			controls.l_press = true;	
 			if( controls.u_press ){
@@ -147,9 +156,9 @@ var control_handlers = {
 		}else if(e.which==32){ // SPACE BAR TO START NEW CHAIN
 
 			if( controls.shifted ){
-				chain.cursor--;
+				images.cursor--;
 			}else{
-				chain.cursor++;
+				images.cursor++;
 			}
 
 			if(hallway.run){
@@ -192,7 +201,7 @@ var control_handlers = {
 			images.width = $('img').eq(0).width();
 			
 			$('#height').addClass('active');
-			$control_selector.val('Height');
+			
 		}else if(e.which==73){// I
 			mirror_gif.init();
 		}else if(e.which==76){// L
@@ -205,7 +214,7 @@ var control_handlers = {
 			
 			
 			$('#opacity').addClass('active');
-			$control_selector.val('Opacity');
+			
 		
 		}else if(e.which==80){// P
 
@@ -254,12 +263,12 @@ var control_handlers = {
 
 			if( controls.shifted ){
 				// save scene instead of still
-				save_out.run(true);
+				save_out.save_scene();
 				return;
 			}
 
 			//save still
-			save_out.run();
+			save_out.save_still();
 			
 		}else if(e.which==54){ // 6 
 			
@@ -301,9 +310,14 @@ var control_handlers = {
 		}
 		else if(e.which==84){
 
-		}else if(e.which==16){ controls.shifted=false }
+		}else if(e.which==16){  // SHIFT
+
+			controls.shifted=false;
+
+		}
 		else if(e.which==18){ controls.alted=false; }
-		else if(e.which==13){ 
+		else if(e.which==13){ // ENTER
+
 			controls.entered=false;
 			hud.hide();
 		}

@@ -1,7 +1,9 @@
+$('#container').append('<div id="chain"></div>');
+
 var chain = {
 	run: true,
 	restart: false,
-	cursor: 0,
+	container: $('#chain'),
 	amount: 0, //THE AMOUNT OF IMAGES SHOWN FROM THE CURRENT CHAIN, ALSO USED FOR Z-INDEX
 	pos_x: 500,
 	pos_y: 100,
@@ -25,7 +27,7 @@ var chain = {
 		if( chain.pos_x + images.height > window.innerWidth ){ chain.pos_x = chain.pos_x - images.height; }
 		
 		//Restart the theme sequence if we've reached the end.
-		if(chain.cursor >= images.set_array.length){ chain.cursor = 0; }
+		if(images.cursor >= images.set_array.length){ images.cursor = 0; }
 
 		chain.amount = 0;
 	},
@@ -107,7 +109,7 @@ var chain = {
 		//ADD THE NEW IMAGE!
 
 		$add_image = $('<img />')
-			.attr("src",images.set_array[chain.cursor])
+			.attr("src",images.set_array[images.cursor])
 			.attr("class","gif chain")
 			.attr('height',current_height)
 			.attr('data-orig-height',images.height)
@@ -125,13 +127,13 @@ var chain = {
 		if( images.border_image ){
 			$add_image.css({
 				'border-width':images.border_width,
-				'border-image':'url('+images.set_array[chain.cursor+1]+') 48% repeat',
+				'border-image':'url('+images.set_array[images.cursor+1]+') 48% repeat',
 				"border-image-slice":images.border_slice+"%"
 			});
 		}
 
 
-		$container.prepend( $add_image );
+		chain.container.prepend( $add_image );
 			
 		if( chain.doubler ){
 			chain.doubler_y = chain.pos_y+chain.doubler_top;
@@ -144,9 +146,9 @@ var chain = {
 			
 			$('#text').text(chain.doubler_size);
 			
-			$container.prepend($('<img />')
+			chain.container.prepend($('<img />')
 				.attr('src',images.set_array[chain.doubler_cursor])
-				.attr('class','gif chain '+chain.cursor)
+				.attr('class','gif chain '+images.cursor)
 				.attr('height',(images.height*chain.doubler_size))
 				.attr('width',(images.width*chain.doubler_size))
 				.attr('alt',chain.amount)
@@ -168,7 +170,7 @@ var chain = {
 		
 		//ADD FRAME TO RECORDING (IF WE'RE RECORDING)
 		if(recording==true){
-			frames.push(["'"+images.set_array[chain.cursor]+"'", "'"+theme_title+chain.cursor+"'", "'"+images.height+"'", "'"+images.width+"'", images.amount, chain.pos_y, chain.pos_x, chain.z, images.radius, images.opacity, chain.doubler_distance, "'"+lockdown_class+"', "+a.currentTime+", "+images.rotation+", '"+bg_flag_url+"'"]);
+			frames.push(["'"+images.set_array[images.cursor]+"'", "'"+theme_title+images.cursor+"'", "'"+images.height+"'", "'"+images.width+"'", images.amount, chain.pos_y, chain.pos_x, chain.z, images.radius, images.opacity, chain.doubler_distance, "'"+lockdown_class+"', "+a.currentTime+", "+images.rotation+", '"+bg_flag_url+"'"]);
 		
 			bg_flag_url = "";
 		}

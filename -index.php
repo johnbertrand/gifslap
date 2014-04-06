@@ -43,6 +43,7 @@
 <script src="core/helpers.js"></script>
 <script src="core/images.js"></script>
 <script src="core/midi.js"></script>
+<script src="core/scenes_helper.js"></script>
 <script src="core/switch_sets.js"></script>
 <script src="core/hud.js"></script>
 <script src="core/save_out.js"></script>
@@ -161,7 +162,7 @@ toggle_value=function(control){
 			break;
 		case 'doubler':
 			doubler = (doubler != true);
-			doubler_cursor = chain.cursor;
+			doubler_cursor = images.cursor;
 			doubler_left = 300;
 			doubler_top = 0;
 			if(midi){if(doubler==true){Jazz.MidiOut(0x90,32,1);}else{Jazz.MidiOut(0x90,32,0)}}
@@ -209,7 +210,7 @@ var enter_set = function(which_key){
 		<? foreach( $custom_set_launch_array as $key => $set_array){
 			if(!$set_array){continue;}?>
 			if (which_key == '<? echo $key; ?>'){
-				chain.cursor = 0;
+				images.cursor = 0;
 				set_array=<? echo $set_array; ?>;
 				
 				shuffle_array(set_array);

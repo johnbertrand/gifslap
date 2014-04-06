@@ -61,7 +61,7 @@ var mirror_gif={
 		if( images.rotation_speed > 0 ){ images.rotation = images.rotation+(images.rotation_speed*.05); }
 
 		$add_image = $('<img />')
-			.attr("src",images.set_array[chain.cursor])
+			.attr("src",images.set_array[images.cursor])
 			.attr('height',images.height)
 			.attr('width',images.width)
 			.css({
@@ -83,7 +83,7 @@ var mirror_gif={
 		if( images.border_image ){
 			$add_image.css({
 				'border-width':images.border_width,
-				'border-image':'url('+images.set_array[chain.cursor+1]+') 48% repeat',
+				'border-image':'url('+images.set_array[images.cursor+1]+') 48% repeat',
 				"border-image-slice":images.border_slice+"%"
 			});
 		}

@@ -1,4 +1,5 @@
 var images = {
+  cursor: 0,
   active_set: sets.all_gifs, // This is the default set when you start
   set_array: null, // this is declared after the object is fully declared
 	height: 500,

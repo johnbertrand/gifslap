@@ -667,7 +667,7 @@ if(midi){
 			chain.doubler = !chain.doubler;
 
 			if(chain.doubler){
-				chain.doubler_cursor = 	chain.cursor;
+				chain.doubler_cursor = 	images.cursor;
 			}
 
 		}else if(a[0]==144&&a[1]==3&&a[2]>0){ //grid button 13
@@ -713,13 +713,13 @@ if(midi){
 
 				
 			if( hud.preview ){
-				chain.cursor++;
+				images.cursor++;
 				hud.refresh_preview();
 				return;
 			}						
 
 
-			chain.cursor++;
+			images.cursor++;
 			chain.restart=true;
 
 
@@ -867,7 +867,7 @@ if(midi){
 			* PREVIOUS IMAGE    *
 			* * * * * * * * * * */
 
-			chain.cursor--;
+			images.cursor--;
 			chain.restart=true;
 
 

@@ -28,22 +28,22 @@ var set_list = Array();
  // /*Y*/ set_list[89] = sets.not_too_shabby;
  // /*Z*/ set_list[90] = sets.starpause;
 
- /*A*/ set_list[65] = sets.all_gifs;
- /*B*/ set_list[66] = sets.MJP_blues_toy;
- /*C*/ set_list[67] = sets.MJP_cosmic_sans;
- /*D*/ set_list[68] = sets.MJP_dead_hand;
- /*E*/ set_list[69] = sets.MJP_detour_of_duty;
+ /*A*/ set_list[65] = [sets.all_gifs, scenes.all_gifs];
+ /*B*/ set_list[66] = [sets.MJP_blues_toy,null];
+ /*C*/ set_list[67] = [sets.MJP_cosmic_sans,null];
+ /*D*/ set_list[68] = [sets.MJP_dead_hand,null];
+ /*E*/ set_list[69] = [sets.MJP_detour_of_duty,null];
  /*F*/ set_list[70] = null;
  /*G*/ set_list[71] = null;
  /*H*/ set_list[72] = null;
- /*I*/ set_list[73] = sets.MJP_civil_disobedience;
+ /*I*/ set_list[73] = [sets.MJP_civil_disobedience,null];
  /*J*/ set_list[74] = null;
  /*K*/ set_list[75] = null;
  /*L*/ set_list[76] = null;
  /*M*/ set_list[77] = null;
- /*N*/ set_list[78] = sets.MJP_polish_cold_war_neon;
+ /*N*/ set_list[78] = [sets.MJP_polish_cold_war_neon,null];
  /*O*/ set_list[79] = null;
- /*P*/ set_list[80] = sets.MJP_pewter_handles;
+ /*P*/ set_list[80] = [sets.MJP_pewter_handles,null];
  /*Q*/ set_list[81] = null;
  /*R*/ set_list[82] = null;
  /*S*/ set_list[83] = null;
@@ -64,18 +64,20 @@ var sets_helper = {
     var set_title_regex = /\/(.*)\//g;
     var set_title = set_title_regex.exec(first_item);
     return set_title[1];
-  }
+  },
+  current_set_name:'all_gifs'
 };
 
 var switch_sets = function(key){
-  new_set = set_list[key];
+  new_set = set_list[key][0];
 
   if(new_set == null){ return; }
 
-  
+  // Activate available scenes
+  scenes_helper.activate_scenes_for_set( set_list[key][1] );
 
   // output the set title on the screen maybe
-  set_title = sets_helper.get_name(new_set);
+  sets_helper.current_set_name = sets_helper.get_name(new_set);
 
   images.active_set = new_set;
 
@@ -84,9 +86,6 @@ var switch_sets = function(key){
   }else{
     images.set_array = new_set.main;
   }
-
-  
-  
 
   if( new_set.punches ){
     puncher.set_array = new_set.punches;
@@ -106,4 +105,6 @@ var switch_sets = function(key){
   inner_bg_mod.reset();
   images.clear();
 
+
 }
+

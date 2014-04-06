@@ -56,7 +56,7 @@ var center_pix={
 
 		center_pix.box.prepend(
 		$('<img />')
-			.attr("src",images.set_array[chain.cursor])
+			.attr("src",images.set_array[images.cursor])
 			.attr('height',images.height)
 			.attr('width',images.width)
 			.css({
