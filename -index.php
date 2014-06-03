@@ -67,7 +67,6 @@
 <script src="modules/mirror_gif.js"></script>
 <script src="modules/center_pix.js"></script>
 <script src="modules/hallway.js"></script>
-<!-- <script src="modules/kscope.js"></script> -->
 
 <!-- ADDONS -->
 <script src="addons/rainbow_bars.js"></script>
@@ -76,7 +75,14 @@
 <script src="addons/big_shrinker.js"></script>
 <script src="addons/puncher.js"></script>
 <script src="addons/corner_box.js"></script>
+<script src="addons/border-boxes.js"></script>
+<script src="addons/rippler.js"></script>
 
+<!-- GAMEPAD -->
+<? if( $_GET['gamepad']=="true" ){?>
+	<script src="core/gamepad.js"></script>
+<? } ?>
+<script src="core/offscreen_hud.js"></script>
 
 <script>
 
@@ -103,7 +109,7 @@ t=setInterval(function(){
 	center_pix.draw();
 	circle.draw();	
 	chain.draw();
-	// kscope.draw();
+	border_boxes.draw();
 	
 },35);
 
@@ -181,5 +187,10 @@ var enter_set = function(which_key){
 
 <script src="core/controls.js"></script>
 <script src="core/module_changer.js"></script>
+<div id="paused-message" style="display:none;font-size:50px;position:absolute;top:10px;right:10px;font-weight:bold;color:#fff;font-family:helvetica;text-align:right;z-index:99999999999999999999;background-color:#000">
+	gifSlap PAUSED
+	<br />
+	<span style="font-size:30px;">Press Start</span>
+</div>
 </body>
 </html>
