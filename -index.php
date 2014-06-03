@@ -10,6 +10,10 @@
 </head>
 <body>
 
+<!-- Scene scripts are loaded into this div -->
+<div id="scene-directives"></div>
+
+<!-- This is for debugging -->
 <div id="text"></div>
 
 <!-- MODULES ADD ELEMENTS TO #CONTAINER: -->
@@ -22,33 +26,47 @@
 </div>
 
 
+<!-- PRINT ALL THE SETS & SCENES FROM THE FILESYSTEM -->
+<? include('core/output_scenes.php'); ?>
+<? include('core/output_sets.php'); ?>
 
 <script>
 <? if( $_GET['midi']=="true" ){?>
 	midi = true;
 	</script>
+	
+	<!-- first check for the additional controller -->
+	<? if( $_GET['midi2']=="true" ){ ?>
+		
+		<!-- initialize controller 2 -->		
+		<object id="Jazz2" type="audio/x-jazz" class="hidden"></object>			
+		<script>var midi2 = true;</script>
+		<script src="core/midi_livid_block_3.js"></script>
+		<!-- special script to map MJP scenes to the Livid Block controller -->
+		<!-- <script src="core/scenes_to_block.js"></script> -->
+
+	<? }else{ ?>
+		<script> var midi2 = false; </script>
+	<? } ?>
+
+	<!-- initialize controller 1 -->
 	<object id="Jazz" type="audio/x-jazz" class="hidden"></object>
+	<script src="core/midi_livid_control_r.js"></script>
+
 <? }else{ ?>
 	var midi = false;
+	var m_out = function(){return;}
 	</script>
 <? } ?>
-
-
-
-<!-- PRINT ALL THE SETS & SCENES FROM THE FILESYSTEM -->
-<? include('core/output_scenes.php'); ?>
-<? include('core/output_sets.php'); ?>
 
 <!-- CORE -->
 <script src="core/helpers.js"></script>
 <script src="core/images.js"></script>
-<script src="core/midi.js"></script>
 <script src="core/scenes_helper.js"></script>
 <script src="core/switch_sets.js"></script>
 <script src="core/hud.js"></script>
 <script src="core/save_out.js"></script>
 <script src="core/image_flagger.js"></script>
-
 
 <!-- MODULES --> 
 <script src="modules/gif_circle.js"></script>
@@ -69,58 +87,6 @@
 
 <script>
 
-//VARIABLES
-
-var
-	run = true,
-	recording = false, //Not currently recording
-	
-	//doubler = false, //IF THE DOUBLER IS ACTIVE
-
-	// doubler_left = 300,
-	// doubler_top = 0,
-	// doubler_cursor = 0,
-	// doubler_distance = 1,
-	// doubler_size = 1,
-	//double_positioning = false,
-	move_loop = setInterval(),
-
-	// joy_vert = 0,
-	// joy_horiz = 0,
-
-	beat_shrink = 0,
-	beat_grow = 500,
-	beat_height = true,
-	beat_width = true,
-	beat_rotator = 180,
-	
-	lockdown_class = ' ', //FOR LOCKDOWN TO WORK IN RECORDINGS? NEEDS TO BE FIXED
-	
-	//rotation_speed = 0,
-	blackout = false;
-
-
-
-//DECLAUE DOM VARIABLES
-var
-$body = $('body'),
-$container = $('#container'),
-$text = $('#text'),
-$inner_bg = $('#inner-bg');
-
-
-
-
-//DECLARE INITIAL BG SET. MOVE TO BG_MOD.JS
-// bg_mod.active_set = all_gifs_bgs;
-// if(bg_mod.active_set.length == 0){ bg_mod.active_set = images.set_array; }
-// shuffle_array(bg_mod.active_set);
-
-// //DECLARE INITIAL INNER_BG SET. MOVE TO INNER_BG_MOD.JS
-// inner_bg_mod.active_set = all_gifs_inner_bgs;
-// if(inner_bg_mod.active_set.length == 0){ inner_bg_mod.active_set = images.set_array; }
-// shuffle_array(inner_bg_mod.active_set);
-// shuffle_array(inner_bg_mod.active_set);
 
 
 //START THE LOOP!!!
@@ -153,34 +119,12 @@ toggle_value=function(control){
 			circle.size_lock = (circle.size_lock != true);
 			if(midi){if( circle.size_lock==true ){Jazz.MidiOut(0x90,41,1);}else{Jazz.MidiOut(0x90,41,0)}}
 			break;
-		case 'recording':
-			if( frames.length == 0 ){ $('#export-recording').addClass('available'); }
-			if(a.paused==false){a.pause();}else{a.play();}
-			recording = (recording != true);
-			bg_flag_url = current_bg;
-			$('#record-button').toggleClass('on');
-			break;
 		case 'doubler':
 			doubler = (doubler != true);
 			doubler_cursor = images.cursor;
 			doubler_left = 300;
 			doubler_top = 0;
 			if(midi){if(doubler==true){Jazz.MidiOut(0x90,32,1);}else{Jazz.MidiOut(0x90,32,0)}}
-			break;
-		case 'double_positioning':
-			double_positioning = !double_positioning;
-			//toggle button light
-			if(double_positioning){ Jazz.MidiOut(0x90,33,1); }else{ Jazz.MidiOut(0x90,33,0); }
-			break;
-		case 'blackout':
-			blackout = !blackout;
-			if(blackout){
-				Jazz.MidiOut(0x90,48,1); 
-				$('img').css('display','none');
-			}else{ 
-				Jazz.MidiOut(0x90,48,0);
-				$('img').css('display','block');
-			}
 			break;
 		case 'rainbow_bars_run':
 			rainbow_bars.run = (rainbow_bars.run != true);

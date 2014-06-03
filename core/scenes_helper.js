@@ -10,13 +10,23 @@ var scenes_helper = {
     $.ajax({
       url: "sets/"+set_title+"/scenes/"+scene_title+".html",
       success:function( html ){
-        //add the script to the bottom of the body, which will immediately evaluate it.
-        $('body').append( html );        
+        //add the script to a div, which will immediately evaluate it.
+        $('#scene-directives').html( html );        
 
       }
     });
+  },
+  activate_scene_by_name: function(scene_title){
 
-    
-    
-  }
+    set_title = sets_helper.current_set_name;
+    $('#text').text(scene_title);
+
+    $.ajax({
+      url: "sets/"+set_title+"/scenes/"+scene_title+".html",
+      success:function( html ){
+        //add the script to a div, which will immediately evaluate it.
+        $('#scene-directives').html( html );     
+      }
+    });
+  },
 }

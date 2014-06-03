@@ -15,7 +15,8 @@ var save_out = {
     'big_shrinker',
     'puncher',
     'corner_box',
-    'mirror_gif'];
+    'mirror_gif',
+    'keydown'];
 
     // exclude is for the elements within objects!
     var exclude = [
