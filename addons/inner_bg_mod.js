@@ -5,9 +5,10 @@
 	$inner_bg_box = $("<div id='inner-bg-box'></div>").css({
 		'height': '80%',
 		'width': '80%',
-		'margin-top': '5%;',
+		'margin-top': '15%;',
 		'background-size': 'cover',
-		'display': 'inline-block'
+		'display': 'inline-block',
+		'z-index':'1'
 	});
 
 	$('#container').append($inner_bg_box);
@@ -29,6 +30,7 @@ var inner_bg_mod = {
 
 	//SHOW THE INNER BG
 	show: function(){
+		inner_bg_mod.box.css('background-image','url('+inner_bg_mod.active_set[inner_bg_mod.cursor]+')');
 		inner_bg_mod.box.css('opacity','1')
 	},
 
@@ -36,6 +38,10 @@ var inner_bg_mod = {
 	reset: function(){
 		inner_bg_mod.clear();
 		inner_bg_mod.cursor = 0;
+		inner_bg_mod.vscrolling_speed = 0;
+		inner_bg_mod.hscrolling_speed = 0;
+		inner_bg_mod.box.css("background-position-x","0px");
+		inner_bg_mod.box.css("background-position-y","0px");
 
 		// Sync with active set
 		if( images.active_set.inner ){
@@ -59,6 +65,10 @@ var inner_bg_mod = {
 		//set the new bg
 		inner_bg_mod.box.css('background-image','url('+inner_bg_mod.active_set[inner_bg_mod.cursor]+')');
 		inner_bg_mod.cursor++;
+
+		if( inner_bg_mod.box.css('opacity') == 0 ){
+			inner_bg_mod.box.css('opacity',1);
+		}
 	},
 
 	//GO TO THE PREVIOUS IMAGE
@@ -68,6 +78,34 @@ var inner_bg_mod = {
 		//set the new bg
 		inner_bg_mod.cursor--;
 		inner_bg_mod.box.css('background-image','url('+inner_bg_mod.active_set[inner_bg_mod.cursor]+')');
+	},
+
+	vscrolling_speed: 0,
+	vscroll_invert: false,
+	vscroll: function(){		
+		if(inner_bg_mod.vscrolling_speed > 0){ 
+			vpos = inner_bg_mod.box.css("background-position-y");
+			vpos = parseInt(vpos);
+			if( inner_bg_mod.vscroll_invert ){
+				inner_bg_mod.box.css("background-position-y",vpos-inner_bg_mod.vscrolling_speed+"px");
+			}else{
+				inner_bg_mod.box.css("background-position-y",vpos+inner_bg_mod.vscrolling_speed+"px");
+			}
+		}
+	},
+
+	hscrolling_speed: 0,
+	hscroll_invert: false,
+	hscroll: function(){		
+		if(inner_bg_mod.hscrolling_speed > 0){ 
+			hpos = inner_bg_mod.box.css("background-position-x");
+			hpos = parseInt(hpos);
+			if( inner_bg_mod.hscroll_invert ){
+				inner_bg_mod.box.css("background-position-x",hpos-inner_bg_mod.hscrolling_speed+"px");
+			}else{
+				inner_bg_mod.box.css("background-position-x",hpos+inner_bg_mod.hscrolling_speed+"px");
+			}
+		}
 	}
 }
 

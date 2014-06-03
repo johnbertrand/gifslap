@@ -81,6 +81,8 @@
 <script>
 
 
+//VARIABLES
+var run = true;
 
 //START THE LOOP!!!
 t=setInterval(function(){
@@ -92,6 +94,8 @@ t=setInterval(function(){
 	images.fly_off();
 	bg_mod.vscroll();
 	bg_mod.hscroll();
+	inner_bg_mod.vscroll();
+	inner_bg_mod.hscroll();
 	
 	// Modules
 	hallway.draw();
