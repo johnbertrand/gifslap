@@ -75,23 +75,6 @@ var chain = {
 		
 		//Auto Rotation
 		if( images.rotation_speed > 0 ){ images.rotation = images.rotation+(images.rotation_speed*.05); }
-		
-		if( beat_shrink > 15 ){
-			if(beat_height){images.height = beat_shrink;}
-			if(beat_width){images.width = beat_shrink;}
-			beat_shrink = beat_shrink - chain.distance*2;
-		}
-		
-		if ( beat_grow < 480){
-			if(beat_height){images.height = beat_grow;}
-			if(beat_width){images.width = beat_grow;}
-			beat_grow = beat_grow + chain.distance*2;
-		}
-		
-		if( beat_rotator < 180 ){
-			images.rotation = beat_rotator;
-			beat_rotator = beat_rotator + 4;
-		}
 
 		if( images.auto_height ){
 			console.log('ah');
@@ -165,38 +148,7 @@ var chain = {
 				
 		chain.amount++;
 		}
-		
-		
-		
-		//ADD FRAME TO RECORDING (IF WE'RE RECORDING)
-		if(recording==true){
-			frames.push(["'"+images.set_array[images.cursor]+"'", "'"+theme_title+images.cursor+"'", "'"+images.height+"'", "'"+images.width+"'", images.amount, chain.pos_y, chain.pos_x, chain.z, images.radius, images.opacity, chain.doubler_distance, "'"+lockdown_class+"', "+a.currentTime+", "+images.rotation+", '"+bg_flag_url+"'"]);
-		
-			bg_flag_url = "";
-		}
-		
-		/*
-		
-		FRAMES DATA FORMAT
-		
-		[0]  - gif filename
-		[1]  - gif class
-		[2]  - height
-		[3]  - width
-		[4]  - trail
-		[5]  - position y
-		[6]  - position x
-		[7]  - z-index
-		[8]  - border-radius
-		[9]  - opacity
-		[10] - distance
-		[11] - lockdown class (this doesnt work?)
-		[12] - music timestamp 
-		[13] - rotation degrees
-		[14] - bg flag url (url only runs once to flag a change)
-
-		*/
-		
+				
 		//REMOVE IMAGES (CLEAN UP PHASE)
 		if(chain.amount >= images.amount){
 
