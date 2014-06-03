@@ -7,6 +7,7 @@ var images = {
 	opacity: 1,
 	radius: 0,
 	rotation: 0,
+  margin: 0,
   rotation_speed: 0,
   randomize_order: true,
   border_image: false,
@@ -17,6 +18,7 @@ var images = {
   auto_height_steps: 8,
   auto_height_cursor: 0,
   fly_off_dist: 20,
+  fly_off_size_modifier: 0,
   fly_off: function(){
 
       css_direction = 'NULL';
@@ -36,7 +38,7 @@ var images = {
 
       if( css_direction == 'NULL' ){ return; }
 
-    $('img').not('.locked').each(function(){
+    $('img').not('.locked,.circle').each(function(){
 
       if( css_direction == "left" || css_direction == "top" ){
         direction_value = $(this).css(css_direction);
@@ -97,6 +99,10 @@ var images = {
   rotate_all: function(degrees){
     images.rotation = images.rotation + degrees;
     $('img').css({'-webkit-transform': 'rotate('+(-1*images.rotation)+'deg) scaleX(-1)'});
+  },
+  next: function(){
+    images.cursor++;
+    offscreen_hud.update();
   }
 }
 

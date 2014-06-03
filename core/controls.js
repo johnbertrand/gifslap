@@ -11,6 +11,11 @@ var control_handlers = {
 		//fire mouse move functions from modules
 		hallway.mouse();
 
+		if(keydown['b']){
+			images.border_width = (controls.curs_width*30)*(controls.curs_height*60);
+			console.log(images.border_width);
+		}
+
 
 	},
 
@@ -169,10 +174,17 @@ var control_handlers = {
 		
 		}else if(e.which==65){// A
 			
-			keydown['a'] = true;
+			keydown['a'] = !keydown['a'];
+
+			keydown['w'] = false;
+			keydown['s'] = false;
+			keydown['d'] = false;
 
 		}else if(e.which==66){//B
-			big_shrinker.go();
+			
+			keydown['b'] = true;
+			images.border_image = true;	
+
 		}else if(e.which==67){//C
 
 			if( controls.shifted ){
@@ -185,7 +197,13 @@ var control_handlers = {
 
 		}else if(e.which==68){// D
 
-			keydown['d'] = true;
+			
+			keydown['d'] = !keydown['d'];
+
+			keydown['w'] = false;
+			keydown['a'] = false;
+			keydown['s'] = false;
+
 
 		}else if(e.which==69){// E
 
@@ -205,6 +223,8 @@ var control_handlers = {
 		}else if(e.which==73){// I
 			mirror_gif.init();
 		}else if(e.which==76){// L
+
+			os_hud.update();
 
 		}else if(e.which==77){// M
 			center_pix.init();
@@ -226,7 +246,11 @@ var control_handlers = {
 			toggle_value('rainbow_bars_run');
 		}else if(e.which==83){// S
 
-			keydown['s']=true;
+			keydown['s']=!keydown['s'];
+
+			keydown['w'] = false;
+			keydown['a'] = false;
+			keydown['d'] = false;
 
 		}else if(e.which==84){// T
 
@@ -236,7 +260,11 @@ var control_handlers = {
 
 		}else if(e.which==87){// W
 			
-			keydown['w'] = true;
+			keydown['w'] = !keydown['w'];
+			
+			keydown['a'] = false;
+			keydown['s'] = false;
+			keydown['d'] = false;
 
 		}else if(e.which==89){// Y
 
@@ -279,11 +307,16 @@ var control_handlers = {
 		
 		if(e.which==65){ // A
 
-			keydown['a'] = false; 
+			
+
+		}else if(e.which==66){ // B
+
+			keydown['b'] = false; 
+			
 
 		}else if(e.which==68){ // D
 
-			keydown['d'] = false; 
+			
 
 		}else if(e.which==70){ // F
 
@@ -300,12 +333,12 @@ var control_handlers = {
 		}
 		else if(e.which==83){ // S
 
-			keydown['s'] = false; 
+			
 
 		}
 		else if(e.which==87) { // W
 
-			keydown['w'] = false;
+			
 			
 		}
 		else if(e.which==84){
@@ -349,3 +382,7 @@ var controls = {
 }
 
 var keydown = new Array();
+keydown['w'] = false;
+keydown['a'] = false;
+keydown['s'] = false;
+keydown['d'] = false;
