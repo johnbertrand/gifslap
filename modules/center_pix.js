@@ -8,7 +8,7 @@
 		'width': '100%',
 		'left': '0px',
 		'top': '0px',
-		'z-index': '0',
+		'z-index': '3',
 		'text-align': 'center'
 	});
 
@@ -51,8 +51,10 @@ var center_pix={
 		mtop = -1*(images.height/2);
 		mleft = -1*(images.width/2);
 
-		images.height = controls.curs_height*1000;
-		images.width = controls.curs_width*1000;
+		console.log(images.height);
+
+		// images.height = controls.curs_height*1000;
+		// images.width = controls.curs_width*1000;
 
 		center_pix.box.prepend(
 		$('<img />')
