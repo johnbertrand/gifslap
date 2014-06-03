@@ -19,13 +19,6 @@
 <!-- MODULES ADD ELEMENTS TO #CONTAINER: -->
 <div id="container"></div>
 
-<div id="readout">
-	<div id="count-bgs"></div>
-	<div id="count-inner-bgs"></div>
-	<div id="count-images"></div>
-</div>
-
-
 <!-- PRINT ALL THE SETS & SCENES FROM THE FILESYSTEM -->
 <? include('core/output_scenes.php'); ?>
 <? include('core/output_sets.php'); ?>
