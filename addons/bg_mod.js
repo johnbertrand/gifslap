@@ -31,6 +31,7 @@ var bg_mod = {
 
 	//SHOW THE BG
 	show: function(){
+		bg_mod.box.css('background-image','url('+bg_mod.active_set[bg_mod.cursor]+')');
 		bg_mod.box.css('opacity','1')
 	},
 
@@ -65,6 +66,10 @@ var bg_mod = {
 		//set the new bg
 		bg_mod.box.css('background-image','url('+bg_mod.active_set[bg_mod.cursor]+')');
 		bg_mod.cursor++;
+
+		if( bg_mod.box.css('opacity') == 0 ){
+			bg_mod.box.css('opacity',1);
+		}
 	},
 
 	//GO TO THE PREVIOUS IMAGE
