@@ -8,7 +8,7 @@
 		'width': '100%',
 		'left': '0px',
 		'top': '0px',
-		'z-index': '0'
+		'z-index': '3'
 	});
 
 	$mirror_left = $("<div id='mirror-left'></div>").css({
@@ -70,7 +70,8 @@ var mirror_gif={
 				'border-radius': images.radius+"px",
 				'position':'relative',
 				'top':'0px',
-				'left':'0px'
+				'left':'0px',
+				'margin-left':images.margin+"px"
 			});
 
 		if( mirror_gif.vertical_stream ){

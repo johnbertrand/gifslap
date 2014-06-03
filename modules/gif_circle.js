@@ -104,6 +104,7 @@ var circle = {
 		//Apply stlyes frame by frame
 
 		if( !circle.size_lock ){
+
 			$(circle_imgs[circle.cursor])
 			//.attr( 'src', images.set_array[images.cursor] )
 			.attr('height',images.height)

@@ -41,7 +41,7 @@ var hallway={
 			'width': '100%',
 			'left': '0px',
 			'top': '0px',
-			'z-index': '0'
+			'z-index': '3'
 		});
 		$layer = $('<div class="hallway-layer"></div>').css({
 			'position': 'absolute',
