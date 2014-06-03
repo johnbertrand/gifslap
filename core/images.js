@@ -13,7 +13,7 @@ var images = {
   border_image: false,
   border_width: 50,
   border_slice: 48,
-  amount: 10, //amount allowed in chain
+  amount: 20, //amount allowed in chain
   auto_height: false,
   auto_height_steps: 8,
   auto_height_cursor: 0,
