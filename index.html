@@ -1,22 +1,79 @@
 <style>
   body{
-  background-color:#000
+    background-color:#000
   }
-  a{
-  display: block;
-  float: left;
-  width: 45%;
-  background-color: #bada55;
-  padding: 5%;
-  box-sizing: border-box;
-  margin: 10px 10px 0 0;
-  font-size: 30px;
-  font-family: helvetica;
-  font-weight: bold;
-  color: #000;
-  text-decoration: none;
+  label{
+    display: block;
+    float: left;
+    width: 30%;
+    background-color: #bada55;
+    padding: 0 2%;
+    height:180px;
+    line-height:180px;
+    box-sizing: border-box;
+    margin: 10px 10px 0 0;
+    font-size: 30px;
+    font-family: helvetica;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+  }
+  input[type=checkbox] {
+    border: 1px solid #262626;
+    margin: 0 10px 0 0;
+    padding: 0;
+    width: 100px;
+    height: 100px;
+    vertical-align: middle;
+    -webkit-appearance: none;
+    -webkit-border-radius: 5px;
+  }
+  input[type=checkbox]:checked {
+    background-color:black;
+  }
+  button {
+    background-color: rgb(97, 207, 128);
+    border: 0;
+    margin: 20px auto;
+    padding: 30px;
+    width: 80%;
+    height: 160px;
+    vertical-align: middle;
+    font-size: 38px;
+    font-weight: bold;
+    -webkit-appearance: none;
   }
 </style>
-<a href="-index.php?gamepad=true">Gamepad</a>
-<a href="-index.php?midi=true">Livid CNTRL:R</a>
-<a href="-index.php?midi=true&midi2=true">Livid CNTRL:R + Block</a>
+<label>
+  <input type="checkbox" data-flag="gamepad=true" />
+  Gamepad
+</label>
+
+<label>
+  <input type="checkbox" data-flag="midi=true" />
+  Livid CNTRL:R
+</label>
+
+<label>
+  <input type="checkbox" data-flag="midi2=true">
+  Livid Block
+</label>
+
+<label>
+  <input type="checkbox" data-flag="popup=true">
+  Offscreen HUD
+</label>
+
+<button>GO</button>
+<script src="core/assets/jquery-1.9.1.min.js"></script>
+<script>
+  url = "-index.php?";
+  
+  $('button').click(function(){
+    $('input[type=checkbox]:checked').each(function(){
+      url = url + $(this).attr('data-flag') + "&";
+    });
+    window.location = url;
+
+  });
+</script>

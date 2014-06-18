@@ -82,7 +82,17 @@
 <? if( $_GET['gamepad']=="true" ){?>
 	<script src="core/gamepad.js"></script>
 <? } ?>
+
+<!-- OFFSCREEN HUD -->
+<script>
+<? if( $_GET['popup']=="true" ){?>
+	var offscreen_hud = true;
+<? }else{ ?>
+	var offscreen_hud = false;
+<? } ?>
+</script>
 <script src="core/offscreen_hud.js"></script>
+
 
 <script>
 

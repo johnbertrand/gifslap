@@ -789,7 +789,7 @@ if(midi){
 
 			images.cursor++;
 			chain.restart=true;
-			offscreen_hud.update();
+			os_hud.update();
 
 
 		}else if(a[0]==144&&a[1]==17&&a[2]>0){ //seq button 2
@@ -806,7 +806,7 @@ if(midi){
 			}
 
 			bg_mod.next();
-			offscreen_hud.update();
+			os_hud.update();
 
 		}else if(a[0]==144&&a[1]==18&&a[2]>0){ //seq button 3
 
@@ -822,7 +822,7 @@ if(midi){
 			}
 
 			inner_bg_mod.next();
-			offscreen_hud.update();
+			os_hud.update();
 
 		}else if(a[0]==144&&a[1]==19&&a[2]>0){ //seq button 4
 
