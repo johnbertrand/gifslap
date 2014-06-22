@@ -29,23 +29,10 @@ var chain = {
 		//Restart the theme sequence if we've reached the end.
 		if(images.cursor >= images.set_array.length){ images.cursor = 0; }
 
-		chain.amount = 0;
 	},
 	draw: function(){
 
 		if(!chain.run){ return; }
-		
-		//HANDLE MOVEMENT
-		/*if(direction=="down"){ pos_y = pos_y+distance; }
-		else if(direction=="up"){ pos_y = pos_y-distance; }
-		else if(direction=='left'){ pos_x = pos_x-distance; }
-		else if(direction=='right'){ pos_x = pos_x+distance;}
-		else if(direction=='up-left'){ pos_y = pos_y-distance; pos_x = pos_x-distance; }
-		else if(direction=='down-left'){ pos_y = pos_y+distance; pos_x = pos_x-distance; }
-		else if(direction=='up-right'){ pos_y = pos_y-distance; pos_x = pos_x+distance; }
-		else if(direction== 'down-right'){ pos_y = pos_y+distance; pos_x = pos_x+distance;}
-			*/
-
 
 		chain.amount++;
 		chain.z++;

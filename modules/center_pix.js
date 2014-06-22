@@ -27,7 +27,7 @@ var center_pix={
 
 		if(center_pix.run){
 			if(midi){ m_out(48,'127'); }
-			clear_images();
+			images.clear();
 			center_pix.current_amount = 0;
 			if( images.width == "auto" ){
 				images.width = 500;
@@ -51,8 +51,7 @@ var center_pix={
 		mtop = -1*(images.height/2);
 		mleft = -1*(images.width/2);
 
-		console.log(images.height);
-
+		
 		// images.height = controls.curs_height*1000;
 		// images.width = controls.curs_width*1000;
 

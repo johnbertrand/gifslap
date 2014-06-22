@@ -10,9 +10,9 @@ var circle = {
 	run: false,
 	refresh: false,
 	refresh_cursor: 0,
-	points: 63,
+	points: 33,
 	radius: 400,
-	theta_length: .1,
+	theta_length: .2,
 	center_x: (window.innerWidth / 2),
 	center_y: (window.innerHeight / 2),
 	angle: 0,
@@ -24,6 +24,7 @@ var circle = {
 	die: function(){
 		circle.run = false;
 		m_out(1,'white');
+		// allows the image cleanup loop to remove these
 		$('.circle').removeClass('circle');
 	},
 	init: function(){
@@ -56,10 +57,6 @@ var circle = {
 			$circle.append(circle_pic)
 			i++;
 		},20);
-		chain.total_amount = chain.total_amount+circle.points;
-
-
-		//$('img').not('.circle').remove();
 		
 	},
 	get_perim: function(){
@@ -85,6 +82,7 @@ var circle = {
 		    circle_imgs[i].style.webkitTransform = "rotate("+circle.angle+"deg)";
 		}
 
+		// circle should not depend on chain. transition this to depend on images.js
 		if( chain.restart == true ){
 			circle.refresh = true;
 			circle.refresh_cursor = -1;
@@ -106,7 +104,6 @@ var circle = {
 		if( !circle.size_lock ){
 
 			$(circle_imgs[circle.cursor])
-			//.attr( 'src', images.set_array[images.cursor] )
 			.attr('height',images.height)
 			.attr('width',images.width)
 			.css({

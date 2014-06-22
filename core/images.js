@@ -13,7 +13,7 @@ var images = {
   border_image: false,
   border_width: 50,
   border_slice: 48,
-  amount: 20, //amount allowed in chain
+  amount: 10, //amount allowed in chain
   auto_height: false,
   auto_height_steps: 8,
   auto_height_cursor: 0,
@@ -93,7 +93,7 @@ var images = {
     $('img').not('.circle, .locked').eq(random_ele).remove();
   },
   clear: function(){
-    $('img').remove();
+    $('img:not(.locked)').remove();
     chain.amount = 0;
   },
   rotate_all: function(degrees){
@@ -101,8 +101,20 @@ var images = {
     $('img').css({'-webkit-transform': 'rotate('+(-1*images.rotation)+'deg) scaleX(-1)'});
   },
   next: function(){
-    images.cursor++;
-    offscreen_hud.update();
+
+    // the fg_offset is for looking ahead to choose the next image
+    if( _3up.fg_offset == 1 ){
+      images.cursor++;  
+    }else{
+      images.cursor = images.cursor + _3up.fg_offset;
+      _3up.fg_offset =1;
+    }
+    
+    _3up.update();
+  },
+  prev: function(){
+    images.cursor--;
+    _3up.update();
   }
 }
 

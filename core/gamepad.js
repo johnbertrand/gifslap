@@ -247,10 +247,8 @@ var gamepadSupport = {
 
       // LR Bumpers
 
-      if(gamepad.buttons[4]){
-        bg_mod.show();
+      if(gamepad.buttons[4])
         bg_mod.next();
-      }
 
       if(gamepad.buttons[5])
         images.next();
@@ -265,12 +263,7 @@ var gamepadSupport = {
       }
 
       if(gamepad.buttons[6])
-        if(bg_mod.box.css('opacity') == 0){
-          bg_mod.next();
-          bg_mod.show();
-        }else{
-          bg_mod.clear();          
-        }
+        bg_mod.clear()
 
       //PAUSE
       if(gamepad.buttons[9] || gamepad.buttons[8]){
@@ -300,60 +293,63 @@ var gamepadSupport = {
       if(gamepad.buttons[15]){
         keydown['w'] = false;
         keydown['s'] = false;
-        keydown['a'] = false;
+        keydown['d'] = false;
         keydown['d'] = !keydown['d'];        
       }
       if(gamepad.buttons[14]){
-        keydown['d'] = false;
+        keydown['a'] = false;
         keydown['s'] = false;
         keydown['w'] = false;
         keydown['a'] = !keydown['a'];
       }
 
     }
+    // tester.updateButton(gamepad.buttons[1], gamepadId, 'button-2');
+    // tester.updateButton(gamepad.buttons[2], gamepadId, 'button-3');
+    // tester.updateButton(gamepad.buttons[3], gamepadId, 'button-4');
+
+    // tester.updateButton(gamepad.buttons[4], gamepadId,
+    //     'button-left-shoulder-top');
+    // tester.updateButton(gamepad.buttons[6], gamepadId,
+    //     'button-left-shoulder-bottom');
+    // tester.updateButton(gamepad.buttons[5], gamepadId,
+    //     'button-right-shoulder-top');
+    // tester.updateButton(gamepad.buttons[7], gamepadId,
+    //     'button-right-shoulder-bottom');
+
+    // tester.updateButton(gamepad.buttons[8], gamepadId, 'button-select');
+    // tester.updateButton(gamepad.buttons[9], gamepadId, 'button-start');
+
+    // tester.updateButton(gamepad.buttons[10], gamepadId, 'stick-1');
+    // tester.updateButton(gamepad.buttons[11], gamepadId, 'stick-2');
+
+    // tester.updateButton(gamepad.buttons[12], gamepadId, 'button-dpad-top');
+    // tester.updateButton(gamepad.buttons[13], gamepadId, 'button-dpad-bottom');
+    // tester.updateButton(gamepad.buttons[14], gamepadId, 'button-dpad-left');
+    // tester.updateButton(gamepad.buttons[15], gamepadId, 'button-dpad-right');
 
     // // Update all the analogue sticks.
       if(gamepad.axes){
-           
-
-          //MIRROR GIF
-          if(mirror_gif.run){
-            
-            // Left stick
+           //left stick
+           if(mirror_gif.run){
             images.rotation = gamepad.axes[1]*100;
             images.margin = gamepad.axes[0]*400;
-
-            //right stick
-            images.height = ((gamepad.axes[3]+1)*100);
-            if( gamepad.axes[2] > -.05 && gamepad.axes[2] < .05 ){
-              images.width = "auto";
-            }else{
-              images.width = ((gamepad.axes[2]+1)*400);            
-            }
-          }
-
-          
-          //CHAIN
-          if(chain.run){
-
-            // Left stick
+           }else{
             chain.move_x = gamepad.axes[0]*100;
             chain.move_y = gamepad.axes[1]*100; 
-            
-            //right stick
-            // images.height = (((gamepad.axes[3]+2)*10)*((gamepad.axes[2]+2)*10));
-            images.height = (gamepad.axes[3]+gamepad.axes[2]+1);
-            // images.width = ((gamepad.axes[2]+1)*400);
-          }
+           }
+           
+           if(mirror_gif.run){
+             images.height = ((gamepad.axes[3]+1)*100);
+           }else{
+             images.height = ((gamepad.axes[3]+1)*400);
+           }
 
-           
-           
-            
-           
-           
-  
-
-           
+           if( gamepad.axes[2] > -.1 && gamepad.axes[2] < .1 ){
+            images.width = "auto";
+           }else{
+            images.width = ((gamepad.axes[2]+1)*400);             
+           }
 
            
           }

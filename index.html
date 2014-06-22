@@ -60,8 +60,13 @@
 </label>
 
 <label>
-  <input type="checkbox" data-flag="popup=true">
-  Offscreen HUD
+  <input type="checkbox" data-flag="offscreen-3up=true">
+  Offscreen 3UP
+</label>
+
+<label>
+  <input type="checkbox" data-flag="corner-3up=true">
+  Corner 3-UP
 </label>
 
 <button>GO</button>
@@ -74,6 +79,11 @@
       url = url + $(this).attr('data-flag') + "&";
     });
     window.location = url;
+  });
 
+  $("body").keypress(function( event ) {
+    if( event.which == 13 ) {
+      $('button').click();
+    }
   });
 </script>

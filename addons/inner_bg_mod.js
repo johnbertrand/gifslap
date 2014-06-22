@@ -62,13 +62,22 @@ var inner_bg_mod = {
 	next: function(){
 		//restart if cursor is at the end
 		if (inner_bg_mod.cursor > inner_bg_mod.active_set.length){ inner_bg_mod.cursor = 0; }
+		
+		// set the cursor
+		if( _3up.ibg_offset == 1 ){
+      inner_bg_mod.cursor++;
+    }else{
+      inner_bg_mod.cursor = inner_bg_mod.cursor + _3up.ibg_offset;
+      _3up.ibg_offset =1;
+    }
+
 		//set the new bg
 		inner_bg_mod.box.css('background-image','url('+inner_bg_mod.active_set[inner_bg_mod.cursor]+')');
-		inner_bg_mod.cursor++;
-
+		
 		if( inner_bg_mod.box.css('opacity') == 0 ){
 			inner_bg_mod.box.css('opacity',1);
 		}
+		_3up.update();
 	},
 
 	//GO TO THE PREVIOUS IMAGE
@@ -78,6 +87,8 @@ var inner_bg_mod = {
 		//set the new bg
 		inner_bg_mod.cursor--;
 		inner_bg_mod.box.css('background-image','url('+inner_bg_mod.active_set[inner_bg_mod.cursor]+')');
+		_3up.update();
+		
 	},
 
 	vscrolling_speed: 0,

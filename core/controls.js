@@ -47,6 +47,10 @@ var control_handlers = {
 
 			controls.shifted = true;	
 
+		}if(e.which==17){ // CONTROL (mac)
+
+			controls.controlled = true;	
+
 		}else if(e.which==13){// ENTER
 
 			controls.entered = true;
@@ -124,15 +128,38 @@ var control_handlers = {
 		}else if(e.which==91 || e.which==93){//COMMAND KEY:set BG GIF
 			
 			if(controls.shifted){
-				inner_bg_mod.show();
-				inner_bg_mod.next();
+
+				// inner bg
+
+				if( controls.controlled ){
+					
+					_3up.ibg_advance_view();
+
+				}else{
+					inner_bg_mod.show();
+					inner_bg_mod.next();	
+				}
+
 			}else if(controls.alted){
+
 				bg_mod.clear();
+
 			}else if(controls.entered){
+
 				inner_bg_mod.clear();
+
 			}else{
-				bg_mod.show();
-				bg_mod.next();
+
+				if( controls.controlled ){
+					
+					_3up.bg_advance_view();
+
+				}else{
+					
+					bg_mod.show();
+					bg_mod.next();	
+
+				}
 			}
 			
 		}else if(e.which==187){//+ to increase trail
@@ -161,9 +188,15 @@ var control_handlers = {
 		}else if(e.which==32){ // SPACE BAR TO START NEW CHAIN
 
 			if( controls.shifted ){
-				images.cursor--;
+				images.prev();
 			}else{
-				images.cursor++;
+
+				if( controls.controlled ){
+					_3up.fg_advance_view();
+				}else{
+					images.next();	
+				}
+				
 			}
 
 			if(hallway.run){
@@ -346,6 +379,10 @@ var control_handlers = {
 		}else if(e.which==16){  // SHIFT
 
 			controls.shifted=false;
+
+		}else if(e.which==17){  // CONTROL KEY (mac)
+
+			controls.controlled=false;
 
 		}
 		else if(e.which==18){ controls.alted=false; }

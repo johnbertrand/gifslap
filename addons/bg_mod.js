@@ -1,6 +1,3 @@
-
-
-
 // add the BG Box to the DOM
 $bg_box = $("<div id='bg-box'></div>").css({
 	'position': 'absolute',
@@ -63,13 +60,23 @@ var bg_mod = {
 	next: function(){
 		//restart if cursor is at the end
 		if (bg_mod.cursor > bg_mod.active_set.length){ bg_mod.cursor = 0; }
+		
+		// set the cursor
+		if( _3up.bg_offset == 1 ){
+      bg_mod.cursor++;
+    }else{
+      bg_mod.cursor = bg_mod.cursor + _3up.bg_offset;
+      _3up.bg_offset =1;
+    }
+
 		//set the new bg
 		bg_mod.box.css('background-image','url('+bg_mod.active_set[bg_mod.cursor]+')');
-		bg_mod.cursor++;
-
+		
 		if( bg_mod.box.css('opacity') == 0 ){
 			bg_mod.box.css('opacity',1);
 		}
+
+		_3up.update();
 	},
 
 	//GO TO THE PREVIOUS IMAGE
@@ -79,6 +86,7 @@ var bg_mod = {
 		//set the new bg
 		bg_mod.cursor--;
 		bg_mod.box.css('background-image','url('+bg_mod.active_set[bg_mod.cursor]+')');
+		_3up.update();
 	},
 	set: function(url){
 		bg_mod.box.css('background-image','url('+url+')');	
