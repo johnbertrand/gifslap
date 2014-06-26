@@ -74,7 +74,7 @@ function cond_incl($script,$get_var){
 <script src="core/images.js"></script>
 <script src="core/scenes_helper.js"></script>
 <script src="core/switch_sets.js"></script>
-<script src="core/hud.js"></script>
+<!-- <script src="core/hud.js"></script> -->
 <script src="core/save_out.js"></script>
 <script src="core/image_flagger.js"></script>
 <script src="core/3up/3up.js"></script>

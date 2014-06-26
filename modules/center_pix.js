@@ -54,7 +54,7 @@ var center_pix={
 		
 		// images.height = controls.curs_height*1000;
 		// images.width = controls.curs_width*1000;
-
+		
 		center_pix.box.prepend(
 		$('<img />')
 			.attr("src",images.set_array[images.cursor])

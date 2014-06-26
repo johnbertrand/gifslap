@@ -107,7 +107,12 @@ var images = {
       images.cursor++;  
     }else{
       images.cursor = images.cursor + _3up.fg_offset;
-      _3up.fg_offset =1;
+      _3up.fg_offset = 1;
+    }
+
+    if(images.cursor >= images.set_array.length){
+      images.cursor = 0;
+      _3up.fg_offset = 1;
     }
     
     _3up.update();
