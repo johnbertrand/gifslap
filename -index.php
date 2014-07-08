@@ -1,4 +1,3 @@
-
 <?
 
 // conditional include function.
@@ -70,7 +69,6 @@ function cond_incl($script,$get_var){
 <? } ?>
 
 <!-- CORE -->
-
 <script src="core/images/images.js"></script>
 <script src="core/switch_state/scenes_helper.js"></script>
 <script src="core/switch_state/switch_sets.js"></script>

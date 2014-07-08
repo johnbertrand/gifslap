@@ -51,45 +51,9 @@ var gamepadSupport = {
       }
     }
   },
-
-  /**
-   * React to the gamepad being connected.
-   */
-  // onGamepadConnect: function(event) {
-  //   // Add the new gamepad on the list of gamepads to look after.
-  //   gamepadSupport.gamepads.push(event.gamepad);
-
-  //   // Ask the tester to update the screen to show more gamepads.
-  //   tester.updateGamepads(gamepadSupport.gamepads);
-
-  //   // Start the polling loop to monitor button changes.
-  //   gamepadSupport.startPolling();
-  // },
-
-  /**
-   * React to the gamepad being disconnected.
-   */
-  // onGamepadDisconnect: function(event) {
-  //   // Remove the gamepad from the list of gamepads to monitor.
-  //   for (var i in gamepadSupport.gamepads) {
-  //     if (gamepadSupport.gamepads[i].index == event.gamepad.index) {
-  //       gamepadSupport.gamepads.splice(i, 1);
-  //       break;
-  //     }
-  //   }
-
-  //   // If no gamepads are left, stop the polling loop.
-  //   if (gamepadSupport.gamepads.length == 0) {
-  //     gamepadSupport.stopPolling();
-  //   }
-
-  //   // Ask the tester to update the screen to remove the gamepad.
-  //   tester.updateGamepads(gamepadSupport.gamepads);
-  // },
-
-  /**
-   * Starts a polling loop to check for gamepad state.
-   */
+  /*
+  * Starts a polling loop to check for gamepad state.
+  */
   startPolling: function() {
     // Don’t accidentally start a second loop, man.
     if (!gamepadSupport.ticking) {
@@ -292,6 +256,11 @@ var gamepadSupport = {
         keydown['a'] = !keydown['a'];
       }
 
+      // analog stick press in
+      if(gamepad.buttons[10].pressed){
+        mirror_gif.vertical_stream = !mirror_gif.vertical_stream;
+      }
+
     }
     
 
@@ -302,17 +271,24 @@ var gamepadSupport = {
         if(mirror_gif.run){
           images.rotation = gamepad.axes[1]*100;
           images.margin = gamepad.axes[0]*400;
+
         }else if(hallway.run){
           hallway.origin_x = gamepad.axes[0]+.25;
           hallway.origin_y = gamepad.axes[1]+.25;
+        
         }else if(chain.run){
           chain.move_x = gamepad.axes[0]*100;
           chain.move_y = gamepad.axes[1]*100; 
+        
+        }else if(center_pix.run){
+          images.height = Math.pow(((gamepad.axes[1]*-1)+2),6.5)+250;
+          images.width = Math.pow(((gamepad.axes[0]*-1)+2),6.5)+250;
         }
          
          // right
         if(mirror_gif.run){
           images.height = ((gamepad.axes[3]+1)*100);
+
         }else if(hallway.run){
           if( gamepad.axes[3]>0.2 ){
             hallway.perspective = gamepad.axes[3]*1450;  
@@ -321,17 +297,15 @@ var gamepadSupport = {
           }else{
             hallway.perspective = 250;
           }
-          
-          // hallway.origin_y = gamepad.axes[1]+.25;
+        
         }else if(chain.run){
           images.height = ((gamepad.axes[3]+1)*400)+20;
-        }
-
+          images.width = ((gamepad.axes[2]+1)*400)+20;
         
-        images.width = ((gamepad.axes[2]+1)*400)+20;             
-           
+        }else if(center_pix.run){
+          images.rotation = (gamepad.axes[3]*10)*(gamepad.axes[2]*10);  
+        }  
       }
-
   }
 };
 
@@ -344,4 +318,11 @@ module_changer.functions= new Array(
     mirror_gif.init,
     center_pix.init
   );
+
+//set images defaults
+images.amount = 25;
+images.fly_off_dist = 50;
+
+chain.distance = 2;
+
 gamepadSupport.init();
