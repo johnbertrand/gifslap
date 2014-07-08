@@ -1,21 +1,3 @@
-/**
- * Copyright 2012 Google Inc. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @author mwichary@google.com (Marcin Wichary)
- */
- 
 var gamepadSupport = {
   // A number of typical buttons recognized by Gamepad API and mapped to
   // standard controls. Any extraneous buttons will have larger indexes.
@@ -51,13 +33,12 @@ var gamepadSupport = {
         !!navigator.webkitGamepads;
 
     if (!gamepadSupportAvailable) {
-      // It doesn’t seem Gamepad API is available – show a message telling
-      // the visitor about it.
-      tester.showNotSupported();
+      alert('gamepad support not available')
     } else {
       // Check and see if gamepadconnected/gamepaddisconnected is supported.
       // If so, listen for those events and don't start polling until a gamepad
       // has been connected.
+      console.log('gamepad supported');
       if ('ongamepadconnected' in window) {
         window.addEventListener('gamepadconnected',
                               gamepadSupport.onGamepadConnect, false);
@@ -65,6 +46,7 @@ var gamepadSupport = {
                                 gamepadSupport.onGamepadDisconnect, false);
       } else {
         // If connection events are not supported just start polling
+        console.log('begin polling')
         gamepadSupport.startPolling();
       }
     }
@@ -73,37 +55,37 @@ var gamepadSupport = {
   /**
    * React to the gamepad being connected.
    */
-  onGamepadConnect: function(event) {
-    // Add the new gamepad on the list of gamepads to look after.
-    gamepadSupport.gamepads.push(event.gamepad);
+  // onGamepadConnect: function(event) {
+  //   // Add the new gamepad on the list of gamepads to look after.
+  //   gamepadSupport.gamepads.push(event.gamepad);
 
-    // Ask the tester to update the screen to show more gamepads.
-    tester.updateGamepads(gamepadSupport.gamepads);
+  //   // Ask the tester to update the screen to show more gamepads.
+  //   tester.updateGamepads(gamepadSupport.gamepads);
 
-    // Start the polling loop to monitor button changes.
-    gamepadSupport.startPolling();
-  },
+  //   // Start the polling loop to monitor button changes.
+  //   gamepadSupport.startPolling();
+  // },
 
   /**
    * React to the gamepad being disconnected.
    */
-  onGamepadDisconnect: function(event) {
-    // Remove the gamepad from the list of gamepads to monitor.
-    for (var i in gamepadSupport.gamepads) {
-      if (gamepadSupport.gamepads[i].index == event.gamepad.index) {
-        gamepadSupport.gamepads.splice(i, 1);
-        break;
-      }
-    }
+  // onGamepadDisconnect: function(event) {
+  //   // Remove the gamepad from the list of gamepads to monitor.
+  //   for (var i in gamepadSupport.gamepads) {
+  //     if (gamepadSupport.gamepads[i].index == event.gamepad.index) {
+  //       gamepadSupport.gamepads.splice(i, 1);
+  //       break;
+  //     }
+  //   }
 
-    // If no gamepads are left, stop the polling loop.
-    if (gamepadSupport.gamepads.length == 0) {
-      gamepadSupport.stopPolling();
-    }
+  //   // If no gamepads are left, stop the polling loop.
+  //   if (gamepadSupport.gamepads.length == 0) {
+  //     gamepadSupport.stopPolling();
+  //   }
 
-    // Ask the tester to update the screen to remove the gamepad.
-    tester.updateGamepads(gamepadSupport.gamepads);
-  },
+  //   // Ask the tester to update the screen to remove the gamepad.
+  //   tester.updateGamepads(gamepadSupport.gamepads);
+  // },
 
   /**
    * Starts a polling loop to check for gamepad state.
@@ -174,7 +156,6 @@ var gamepadSupport = {
         continue;
       }
       gamepadSupport.prevTimestamps[i] = gamepad.timestamp;
-
       gamepadSupport.updateDisplay(i);
     }
   },
@@ -224,36 +205,47 @@ var gamepadSupport = {
   // Call the tester with new state and ask it to update the visual
   // representation of a given gamepad.
   updateDisplay: function(gamepadId) {
+
     var gamepad = gamepadSupport.gamepads[gamepadId];
 
-    // console.log(gamepad.buttons);
+    // console.log(gamepad.buttons)
 
-    // Update all the buttons (and their corresponding labels) on screen.
+    
     if(gamepad.buttons){
-
-      // Face Buttons
-      if(gamepad.buttons[0]){ // A
+      
+      if(gamepad.buttons[0].pressed){ // A
         module_changer.step();
       }
-      if(gamepad.buttons[1]){ // B
+      
+      if(gamepad.buttons[1].pressed){ // B
        module_changer.step(); 
       }
-      if(gamepad.buttons[2]){ // X
+
+      if(gamepad.buttons[2].pressed){ // X
         module_changer.step();
       }
-      if(gamepad.buttons[3]){ // Y
+      if(gamepad.buttons[3].pressed){ // Y
         module_changer.step();
       }
 
-      // LR Bumpers
+      
 
-      if(gamepad.buttons[4])
+      if(gamepad.buttons[4].pressed) // left bumper
         bg_mod.next();
 
-      if(gamepad.buttons[5])
+      if(gamepad.buttons[5].pressed) // right bumper
         images.next();
 
-      if(gamepad.buttons[7]){
+      if(gamepad.buttons[6].pressed){ // left trigger
+        if(bg_mod.box.css('opacity') == 0){
+          bg_mod.next();
+          bg_mod.show();
+        }else{
+          bg_mod.clear();          
+        }
+      }
+
+      if(gamepad.buttons[7].pressed){ // right trigger
         if(inner_bg_mod.box.css('opacity') == 0){
           inner_bg_mod.next();
           inner_bg_mod.show();
@@ -262,11 +254,10 @@ var gamepadSupport = {
         }
       }
 
-      if(gamepad.buttons[6])
-        bg_mod.clear()
+      
 
-      //PAUSE
-      if(gamepad.buttons[9] || gamepad.buttons[8]){
+      // PAUSE
+      if(gamepad.buttons[9].pressed || gamepad.buttons[8].pressed){
         run = !run;
         if(!run){
           $('#paused-message').show();
@@ -275,111 +266,82 @@ var gamepadSupport = {
         }
       }
 
-
-
       // D PAD
-      if(gamepad.buttons[12]){
+      if(gamepad.buttons[12].pressed){ // up
         keydown['a'] = false;
         keydown['s'] = false;
         keydown['d'] = false;
         keydown['w'] = !keydown['w'];
       }
-      if(gamepad.buttons[13]){
+      if(gamepad.buttons[13].pressed){ // down
         keydown['a'] = false;
         keydown['w'] = false;
         keydown['d'] = false;
         keydown['s'] = !keydown['s'];
       }
-      if(gamepad.buttons[15]){
+      if(gamepad.buttons[15].pressed){ // right
         keydown['w'] = false;
         keydown['s'] = false;
-        keydown['d'] = false;
+        keydown['a'] = false;
         keydown['d'] = !keydown['d'];        
       }
-      if(gamepad.buttons[14]){
-        keydown['a'] = false;
+      if(gamepad.buttons[14].pressed){ // left
+        keydown['d'] = false;
         keydown['s'] = false;
         keydown['w'] = false;
         keydown['a'] = !keydown['a'];
       }
 
     }
-    // tester.updateButton(gamepad.buttons[1], gamepadId, 'button-2');
-    // tester.updateButton(gamepad.buttons[2], gamepadId, 'button-3');
-    // tester.updateButton(gamepad.buttons[3], gamepadId, 'button-4');
+    
 
-    // tester.updateButton(gamepad.buttons[4], gamepadId,
-    //     'button-left-shoulder-top');
-    // tester.updateButton(gamepad.buttons[6], gamepadId,
-    //     'button-left-shoulder-bottom');
-    // tester.updateButton(gamepad.buttons[5], gamepadId,
-    //     'button-right-shoulder-top');
-    // tester.updateButton(gamepad.buttons[7], gamepadId,
-    //     'button-right-shoulder-bottom');
-
-    // tester.updateButton(gamepad.buttons[8], gamepadId, 'button-select');
-    // tester.updateButton(gamepad.buttons[9], gamepadId, 'button-start');
-
-    // tester.updateButton(gamepad.buttons[10], gamepadId, 'stick-1');
-    // tester.updateButton(gamepad.buttons[11], gamepadId, 'stick-2');
-
-    // tester.updateButton(gamepad.buttons[12], gamepadId, 'button-dpad-top');
-    // tester.updateButton(gamepad.buttons[13], gamepadId, 'button-dpad-bottom');
-    // tester.updateButton(gamepad.buttons[14], gamepadId, 'button-dpad-left');
-    // tester.updateButton(gamepad.buttons[15], gamepadId, 'button-dpad-right');
-
-    // // Update all the analogue sticks.
+    // Update all the analogue sticks.
       if(gamepad.axes){
-           //left stick
-           if(mirror_gif.run){
-            images.rotation = gamepad.axes[1]*100;
-            images.margin = gamepad.axes[0]*400;
-           }else{
-            chain.move_x = gamepad.axes[0]*100;
-            chain.move_y = gamepad.axes[1]*100; 
-           }
-           
-           if(mirror_gif.run){
-             images.height = ((gamepad.axes[3]+1)*100);
-           }else{
-             images.height = ((gamepad.axes[3]+1)*400);
-           }
-
-           if( gamepad.axes[2] > -.1 && gamepad.axes[2] < .1 ){
-            images.width = "auto";
-           }else{
-            images.width = ((gamepad.axes[2]+1)*400);             
-           }
-
-           
+        
+        // left
+        if(mirror_gif.run){
+          images.rotation = gamepad.axes[1]*100;
+          images.margin = gamepad.axes[0]*400;
+        }else if(hallway.run){
+          hallway.origin_x = gamepad.axes[0]+.25;
+          hallway.origin_y = gamepad.axes[1]+.25;
+        }else if(chain.run){
+          chain.move_x = gamepad.axes[0]*100;
+          chain.move_y = gamepad.axes[1]*100; 
+        }
+         
+         // right
+        if(mirror_gif.run){
+          images.height = ((gamepad.axes[3]+1)*100);
+        }else if(hallway.run){
+          if( gamepad.axes[3]>0.2 ){
+            hallway.perspective = gamepad.axes[3]*1450;  
+          }else if( gamepad.axes[3]< -0.2 ){
+            hallway.perspective = (gamepad.axes[3]*-1)*1450;
+          }else{
+            hallway.perspective = 250;
           }
-    // tester.updateAxis(gamepad.axes[1], gamepadId,
-    //     'stick-1-axis-y', 'stick-1', false);
-    // tester.updateAxis(gamepad.axes[2], gamepadId,
-    //     'stick-2-axis-x', 'stick-2', true);
-    // tester.updateAxis(gamepad.axes[3], gamepadId,
-    //     'stick-2-axis-y', 'stick-2', false);
+          
+          // hallway.origin_y = gamepad.axes[1]+.25;
+        }else if(chain.run){
+          images.height = ((gamepad.axes[3]+1)*400)+20;
+        }
 
-    // // Update extraneous buttons.
-    // var extraButtonId = gamepadSupport.TYPICAL_BUTTON_COUNT;
-    // while (typeof gamepad.buttons[extraButtonId] != 'undefined') {
-    //   tester.updateButton(gamepad.buttons[extraButtonId], gamepadId,
-    //       'extra-button-' + extraButtonId);
-
-    //   extraButtonId++;
-    // }
-
-    // // Update extraneous axes.
-    // var extraAxisId = gamepadSupport.TYPICAL_AXIS_COUNT;
-    // while (typeof gamepad.axes[extraAxisId] != 'undefined') {
-    //   tester.updateAxis(gamepad.axes[extraAxisId], gamepadId,
-    //       'extra-axis-' + extraAxisId);
-
-    //   extraAxisId++;
-    // }
+        
+        images.width = ((gamepad.axes[2]+1)*400)+20;             
+           
+      }
 
   }
 };
 
 gifslap_gamepad = true;
+
+// set modules for use with gamepad mode
+module_changer.functions= new Array(
+    chain.init,
+    hallway.init,
+    mirror_gif.init,
+    center_pix.init
+  );
 gamepadSupport.init();

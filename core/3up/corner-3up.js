@@ -4,8 +4,8 @@ var corner_3up = {
   init: function(){
     $3up_box = $( "<div id='_3up' />" ).css({
       'position':'absolute',
-      'bottom':'10px;',
-      'left':'10px;',
+      'bottom':'10px',
+      'left':'10px',
       'z-index':'9999999999999999'
     });
     corner_3up.$fg = $('<img src="#" class="locked" />').css({'margin-right':'10px','width':'100px'});
@@ -18,7 +18,7 @@ var corner_3up = {
   $bg: null,
   $ibg: null,
   update: function(){
-    console.log('update');
+    
     corner_3up.$fg.attr('src',images.set_array[images.cursor+_3up.fg_offset]);
     corner_3up.$bg.attr('src',bg_mod.active_set[bg_mod.cursor+_3up.bg_offset]);
     corner_3up.$ibg.attr('src',inner_bg_mod.active_set[inner_bg_mod.cursor+_3up.ibg_offset]);

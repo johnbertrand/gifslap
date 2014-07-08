@@ -7,7 +7,7 @@ var image_flagger = {
     $.ajax({
       type:"POST",
       data: data_string,
-      url: "core/image_flagger.php",
+      url: "core/images/image_flagger.php",
       success:function( data ){
         // alert(data);
       }

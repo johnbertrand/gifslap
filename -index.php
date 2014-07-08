@@ -20,9 +20,9 @@ function cond_incl($script,$get_var){
 <title>.gifSlap</title>
 
 <!-- ASSETS -->
-
 <link rel="stylesheet" href="core/assets/style.css" />
 <script type="text/javascript" src="core/assets/jquery-1.9.1.min.js"></script>
+<script src="core/assets/helpers.js"></script>
 
 </head>
 <body>
@@ -37,8 +37,8 @@ function cond_incl($script,$get_var){
 <div id="container"></div>
 
 <!-- PRINT ALL THE SETS & SCENES FROM THE FILESYSTEM -->
-<? include('core/output_scenes.php'); ?>
-<? include('core/output_sets.php'); ?>
+<? include('core/init/output_scenes.php'); ?>
+<? include('core/init/output_sets.php'); ?>
 
 <script>
 <? if( $_GET['midi']=="true" ){?>
@@ -51,9 +51,9 @@ function cond_incl($script,$get_var){
 		<!-- initialize controller 2 -->		
 		<object id="Jazz2" type="audio/x-jazz" class="hidden"></object>			
 		<script>var midi2 = true;</script>
-		<script src="core/midi_livid_block_3.js"></script>
+		<script src="core/controls/midi_livid_block_3.js"></script>
 		<!-- special script to map MJP scenes to the Livid Block controller -->
-		<!-- <script src="core/scenes_to_block.js"></script> -->
+		<!-- <script src="core/controls/scenes_to_block.js"></script> -->
 
 	<? }else{ ?>
 		<script> var midi2 = false; </script>
@@ -61,7 +61,7 @@ function cond_incl($script,$get_var){
 
 	<!-- initialize controller 1 -->
 	<object id="Jazz" type="audio/x-jazz" class="hidden"></object>
-	<script src="core/midi_livid_control_r.js"></script>
+	<script src="core/controls/midi_livid_control_r.js"></script>
 
 <? }else{ ?>
 	var midi = false;
@@ -70,13 +70,13 @@ function cond_incl($script,$get_var){
 <? } ?>
 
 <!-- CORE -->
-<script src="core/helpers.js"></script>
-<script src="core/images.js"></script>
-<script src="core/scenes_helper.js"></script>
-<script src="core/switch_sets.js"></script>
-<script src="core/hud.js"></script>
-<script src="core/save_out.js"></script>
-<script src="core/image_flagger.js"></script>
+
+<script src="core/images/images.js"></script>
+<script src="core/switch_state/scenes_helper.js"></script>
+<script src="core/switch_state/switch_sets.js"></script>
+<!-- <script src="core/hud.js"></script> -->
+<script src="core/save_state/save_out.js"></script>
+<script src="core/images/image_flagger.js"></script>
 <script src="core/3up/3up.js"></script>
 <? cond_incl("core/3up/corner-3up.js","corner-3up"); ?>
 <?// cond_incl("core/3up/offscreen-3up.js","offscreen-3up"); ?>
@@ -99,10 +99,10 @@ function cond_incl($script,$get_var){
 <script src="addons/rippler.js"></script>
 
 <!-- COMPUTER CONTROLS -->
-<script src="core/controls.js"></script>
+<script src="core/controls/controls.js"></script>
 
 <!-- MODULE CHANGER -->
-<script src="core/module_changer.js"></script>
+<script src="core/switch_state/module_changer.js"></script>
 
 
 <script>
@@ -209,7 +209,7 @@ var enter_set = function(which_key){
 </script>
 
 <!-- GAMEPAD -->
-<? cond_incl("core/gamepad.js","gamepad") ?>
+<? cond_incl("core/controls/gamepad.js","gamepad") ?>
 
 <div id="paused-message" style="display:none;font-size:50px;position:absolute;top:10px;right:10px;font-weight:bold;color:#fff;font-family:helvetica;text-align:right;z-index:99999999999999999999;background-color:#000">
 	gifSlap PAUSED

@@ -95,7 +95,7 @@ var inner_bg_mod = {
 	vscroll_invert: false,
 	vscroll: function(){		
 		if(inner_bg_mod.vscrolling_speed > 0){ 
-			vpos = inner_bg_mod.box.css("background-position-y");
+			vpos = inner_bg_mod.box.css('backgroundPosition').split(' ')[1];
 			vpos = parseInt(vpos);
 			if( inner_bg_mod.vscroll_invert ){
 				inner_bg_mod.box.css("background-position-y",vpos-inner_bg_mod.vscrolling_speed+"px");
@@ -109,7 +109,7 @@ var inner_bg_mod = {
 	hscroll_invert: false,
 	hscroll: function(){		
 		if(inner_bg_mod.hscrolling_speed > 0){ 
-			hpos = inner_bg_mod.box.css("background-position-x");
+			hpos = inner_bg_mod.box.css('backgroundPosition').split(' ')[0];
 			hpos = parseInt(hpos);
 			if( inner_bg_mod.hscroll_invert ){
 				inner_bg_mod.box.css("background-position-x",hpos-inner_bg_mod.hscrolling_speed+"px");

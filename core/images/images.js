@@ -110,10 +110,12 @@ var images = {
       _3up.fg_offset =1;
     }
     
+    circle.restart();
     _3up.update();
   },
   prev: function(){
     images.cursor--;
+    circle.restart();
     _3up.update();
   }
 }

@@ -10,7 +10,7 @@ var circle = {
 	run: false,
 	refresh: false,
 	refresh_cursor: 0,
-	points: 33,
+	points: 31,
 	radius: 400,
 	theta_length: .2,
 	center_x: (window.innerWidth / 2),
@@ -72,6 +72,10 @@ var circle = {
 		}
 		return perim;
 	},
+	restart:function(){
+		circle.refresh = true;
+		circle.refresh_cursor = -1;
+	},
 	draw: function(){
 
 		if(!circle.run){ return; }
@@ -83,11 +87,10 @@ var circle = {
 		}
 
 		// circle should not depend on chain. transition this to depend on images.js
-		if( chain.restart == true ){
-			circle.refresh = true;
-			circle.refresh_cursor = -1;
-			chain.restart = false;
-		}
+		// if( chain.restart == true ){
+			
+		// 	chain.restart = false;
+		// }
 
 		if( circle.refresh ){
 			$( circle_imgs[circle.refresh_cursor] ).attr('src',images.set_array[images.cursor]);

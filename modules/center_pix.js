@@ -14,6 +14,9 @@
 
 	$('#container').append($center_pix);
 
+	var css = '#center-pix div:nth-child(1){-webkit-transform:scale(3)}#center-pix div:nth-child(2){-webkit-transform:scale(2.5)}#center-pix div:nth-child(3){-webkit-transform:scale(2)}#center-pix div:nth-child(4){-webkit-transform:scale(1.5)}#center-pix div:nth-child(6){-webkit-transform:scale(.5)}';
+	add_css( css );
+
 }());
 
 var center_pix={
@@ -55,8 +58,7 @@ var center_pix={
 		// images.height = controls.curs_height*1000;
 		// images.width = controls.curs_width*1000;
 
-		center_pix.box.prepend(
-		$('<img />')
+		$img = $('<img />')
 			.attr("src",images.set_array[images.cursor])
 			.attr('height',images.height)
 			.attr('width',images.width)
@@ -69,7 +71,9 @@ var center_pix={
 				'position':'absolute',
 				'margin-top': mtop,
 				'margin-left': mleft
-			}));
+			});
+		$div = $('<div style="height:100%" />').append( $img );
+		center_pix.box.prepend( $div );
 		center_pix.current_amount++;
 
 		if(center_pix.current_amount >= center_pix.layers){

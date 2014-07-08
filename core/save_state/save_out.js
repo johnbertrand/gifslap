@@ -133,7 +133,7 @@ var save_out = {
     $.ajax({
       type:"POST",
       data: data_string,
-      url: "core/save_scene.php",
+      url: "core/save_state/save_scene.php",
       success:function( data ){
         alert(data);
       }
@@ -156,7 +156,7 @@ var save_out = {
     $.ajax({
       type:"POST",
       data: data_string,
-      url: "core/save_still.php",
+      url: "core/save_state/save_still.php",
       success:function( data ){
         //alert(data);
       }

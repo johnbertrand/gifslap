@@ -434,6 +434,7 @@ if(midi){
 			* * * * * * * * * * * * */
 
 			bg_mod.vscrolling_speed=a[2]*.5;
+			console.log()
 
 		}else if(a[0]==176&&a[1]==50){ //encoder spin 9
 
@@ -780,16 +781,18 @@ if(midi){
 			* * * * * * * * * * */
 
 				
-			if( hud.preview ){
-				images.cursor++;
-				hud.refresh_preview();
-				return;
-			}						
+			// if( hud.preview ){
+			// 	images.cursor++;
+			// 	hud.refresh_preview();
+			// 	return;
+			// }						
 
 
-			images.cursor++;
-			chain.restart=true;
-			os_hud.update();
+			images.next();
+
+			// images.cursor++;
+			// chain.restart=true;
+			// os_hud.update();
 
 
 		}else if(a[0]==144&&a[1]==17&&a[2]>0){ //seq button 2
@@ -799,14 +802,18 @@ if(midi){
 			* NEXT BG           *
 			* * * * * * * * * * */
 
-			if( hud.preview ){
-				bg_mod.cursor++;
-				hud.refresh_preview();
-				return;
-			}
+			// if( hud.preview ){
+			// 	bg_mod.cursor++;
+			// 	hud.refresh_preview();
+			// 	return;
+			// }
 
-			bg_mod.next();
-			os_hud.update();
+			// bg_mod.next();
+			// os_hud.update();
+
+			bg_mod.show();
+			bg_mod.next();	
+			
 
 		}else if(a[0]==144&&a[1]==18&&a[2]>0){ //seq button 3
 
@@ -815,14 +822,17 @@ if(midi){
 			* NEXT INNER        *
 			* * * * * * * * * * */
 
-			if( hud.preview ){
-				inner_bg_mod.cursor++;
-				hud.refresh_preview();
-				return;
-			}
+			// if( hud.preview ){
+			// 	inner_bg_mod.cursor++;
+			// 	hud.refresh_preview();
+			// 	return;
+			// }
 
-			inner_bg_mod.next();
-			os_hud.update();
+			// inner_bg_mod.next();
+			// os_hud.update();
+
+			inner_bg_mod.show();
+			inner_bg_mod.next();	
 
 		}else if(a[0]==144&&a[1]==19&&a[2]>0){ //seq button 4
 
@@ -899,37 +909,47 @@ if(midi){
 			beat_height = false;
 			beat_width = true;
 
-		}else if(a[0]==144&&a[1]==29&&a[2]>0){ //seq button 14
+		}else if(a[0]==144&&a[1]==29&&a[2]>1){ //seq button 14
 
-		}else if(a[0]==144&&a[1]==30){ //seq button 15
+			_3up.fg_advance_view();
+
+		}else if(a[0]==144&&a[1]==30&&a[2]>1){ //seq button 15
+
+			_3up.bg_advance_view();
 
 			/* * * * * * * * *  * 
 			*                   *
 			* WIDTH BUMP ++     *
 			* * * * * * * * * * */
 
-			size_mod = size_mod+80;
-			if(size_mod > 500){ size_mod = 50; }
+			// size_mod = size_mod+80;
+			// if(size_mod > 500){ size_mod = 50; }
 
-			$('img').each(function(){
-				w = $(this).width();
-				$(this).width( w + size_mod );
-			});
+			// $('img').each(function(){
+			// 	w = $(this).width();
+			// 	$(this).width( w + size_mod );
+			// });
 
-		}else if(a[0]==144&&a[1]==31){ //seq button 16
+		}else if(a[0]==144&&a[1]==31&&a[2]>1){ //seq button 16
+
+
+			// inner BG advance view
+			_3up.ibg_advance_view();
+
+
 
 			/* * * * * * * * * * * 
 			*                    *
 			* HEIGHT BUMP ++     *
 			* * * * * * * * * * */
 
-			size_mod = size_mod+80;
-			if(size_mod > 500){ size_mod = 50; }
+			// size_mod = size_mod+80;
+			// if(size_mod > 500){ size_mod = 50; }
 
-			$('img').each(function(){
-				h = $(this).height();
-				$(this).height( h + size_mod );
-			});
+			// $('img').each(function(){
+			// 	h = $(this).height();
+			// 	$(this).height( h + size_mod );
+			// });
 
 		}else if(a[0]==144&&a[1]==32&&a[2]>0){ //seq button LOW 1
 
@@ -938,8 +958,10 @@ if(midi){
 			* PREVIOUS IMAGE    *
 			* * * * * * * * * * */
 
-			images.cursor--;
-			chain.restart=true;
+			// images.cursor--;
+			// chain.restart=true;
+
+			images.prev();
 
 
 		}else if(a[0]==144&&a[1]==33&&a[2]>0){ //seq button LOW 2
@@ -1050,35 +1072,43 @@ if(midi){
 
 		}else if(a[0]==144&&a[1]==45&&a[2]>0){ //seq button LOW 14
 
-		}else if(a[0]==144&&a[1]==46){ //seq button LOW 15
+			images.next();
+
+		}else if(a[0]==144&&a[1]==46&&a[2]>0){ //seq button LOW 15
+
+			bg_mod.show();
+			bg_mod.next();	
 
 			/* * * * * * * * *  * 
 			*                   *
 			* WIDTH BUMP --     *
 			* * * * * * * * * * */
 
-			size_mod = size_mod-50;
-			if(size_mod < -100){ size_mod = 500; }
+			// size_mod = size_mod-50;
+			// if(size_mod < -100){ size_mod = 500; }
 
-			$('img').each(function(){
-				w = $(this).width();
-				$(this).width( h + size_mod );
-			});
+			// $('img').each(function(){
+			// 	w = $(this).width();
+			// 	$(this).width( h + size_mod );
+			// });
 
-		}else if(a[0]==144&&a[1]==47){ //seq button LOW 16
+		}else if(a[0]==144&&a[1]==47&&a[2]>0){ //seq button LOW 16
+
+			inner_bg_mod.show();
+			inner_bg_mod.next();
 
 			/* * * * * * * * *  * 
 			*                   *
 			* HEIGHT BUMP --    *
 			* * * * * * * * * * */
 
-			size_mod = size_mod-50;
-			if(size_mod < -100){ size_mod = 500; }
+			// size_mod = size_mod-50;
+			// if(size_mod < -100){ size_mod = 500; }
 
-			$('img').each(function(){
-				h = $(this).height();
-				$(this).height( h + size_mod );
-			});
+			// $('img').each(function(){
+			// 	h = $(this).height();
+			// 	$(this).height( h + size_mod );
+			// });
 
 		}
 
@@ -1152,8 +1182,10 @@ if(midi){
 	// m_out(43,'blue');
 	// m_out(44,'blue');
 
-	// m_out(30,'white'); //bumpers
-	// m_out(46,'white');
-	// m_out(31,'white');
-	// m_out(47,'white');
+	m_out(29,'pink');
+	m_out(30,'pink');
+	m_out(45,'white');
+	m_out(46,'white');
+	m_out(31,'pink');
+	m_out(47,'white');
 }

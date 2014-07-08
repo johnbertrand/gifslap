@@ -310,8 +310,36 @@ var control_handlers = {
 		}else if(e.which==50){//2
 			
 		}else if(e.which==51){//3
+
+			bg_mod.box.css('background-image','url(sets/grimecraft/grimecraft_alpha1.png)');
 			
 		}else if(e.which==52){//4
+
+			bg_mod.box.css('background-image','url(sets/grimecraft/Grimecraft_alpha3.png)');
+
+		}else if(e.which==53){//5
+
+			bg_mod.box.css('background-image','url(sets/grimecraft/grimecraft_duality.png)');
+
+		}else if(e.which==54){//6
+
+			bg_mod.box.css('background-image','url(sets/grimecraft/Grimecraft_alpha2.png)');
+
+		}else if(e.which==55){//7
+
+			images.set_array[images.cursor] = "sets/grimecraft/hearts.png";
+
+		}else if(e.which==56){//8
+
+			images.set_array[images.cursor] = "sets/grimecraft/trans1.png";
+
+		}else if(e.which==57){//9
+
+			images.set_array[images.cursor] = "sets/grimecraft/trans2.png";
+
+		}else if(e.which==48){//0
+
+			images.set_array[images.cursor] = "sets/grimecraft/trans3.png";
 
 		}else if(e.which==27){// ESC
 

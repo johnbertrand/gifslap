@@ -6,8 +6,7 @@ $bg_box = $("<div id='bg-box'></div>").css({
 	'z-index': '-1',
 	'left': '0px',
 	'top': '0px',
-	'background-position-y':'0px',
-	'background-position-x':'0px'
+	'-webkit-transform':'translate(0px)'
 });
 
 $('#container').append($bg_box);
@@ -38,8 +37,8 @@ var bg_mod = {
 		bg_mod.cursor = 0;
 		bg_mod.vscrolling_speed = 0;
 		bg_mod.hscrolling_speed = 0;
-		bg_mod.box.css("background-position-x","0px");
-		bg_mod.box.css("background-position-y","0px");
+		bg_mod.box.css("background-position-x","10px");
+		bg_mod.box.css("background-position-y","10px");
 
 		// Sync with active set
 		if( images.active_set.bgs ){
@@ -96,8 +95,9 @@ var bg_mod = {
 	vscroll_invert: false,
 	vscroll: function(){		
 		if(bg_mod.vscrolling_speed > 0){ 
-			vpos = bg_mod.box.css("background-position-y");
+			vpos = bg_mod.box.css('backgroundPosition').split(' ')[1];
 			vpos = parseInt(vpos);
+
 			if( bg_mod.vscroll_invert ){
 				bg_mod.box.css("background-position-y",vpos-bg_mod.vscrolling_speed+"px");
 			}else{
@@ -109,8 +109,8 @@ var bg_mod = {
 	hscrolling_speed: 0,
 	hscroll_invert: false,
 	hscroll: function(){		
-		if(bg_mod.hscrolling_speed > 0){ 
-			hpos = bg_mod.box.css("background-position-x");
+		if(bg_mod.hscrolling_speed > 0){
+			hpos = bg_mod.box.css('backgroundPosition').split(' ')[0]; 
 			hpos = parseInt(hpos);
 			if( bg_mod.hscroll_invert ){
 				bg_mod.box.css("background-position-x",hpos-bg_mod.hscrolling_speed+"px");
