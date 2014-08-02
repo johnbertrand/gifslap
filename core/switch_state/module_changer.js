@@ -29,5 +29,29 @@ module_changer = {
 			module_changer.current = 0;
 		}
 		module_changer.functions[module_changer.current]();
+	},
+	start:function(mode){
+		module_changer.kill_all();
+		switch (mode) {
+	    case 'circle':
+	        images.height = 100;
+	        circle.init();
+	        break;
+	    case 'chain':
+	        chain.init();
+	        break;
+	    case 'hallway':
+	        hallway.init();
+	        break;
+	    case 'mirror_gif':
+	    		images.width = 500;
+	    		images.height = 30;
+	    		images.amount = 80;
+	        mirror_gif.init();
+	        break;
+	    case 'center_pix':
+	        center_pix.init();
+	        break;
+		}
 	}
 }

@@ -246,6 +246,13 @@ if(midi){
 
 		}else if(a[0]==176&&a[1]==26){ //knob 19
 
+			/* * * * * * * * * * * * * * * * *
+			*                                *
+			* ROTATE BIG SHRINKER            *
+			* * * * * * * * * * * * * * * * */						
+
+			big_shrinker.rotate(a[2]);
+
 		}else if(a[0]==176&&a[1]==30){ //knob 20
 
 		}else if(a[0]==176&&a[1]==19){ //knob 21
@@ -269,6 +276,13 @@ if(midi){
 		}else if(a[0]==176&&a[1]==26){ //knob 23
 
 		}else if(a[0]==176&&a[1]==31){ //knob 24
+
+			/* * * * * * * * * * * * * * * * *
+			*                                *
+			* ROTATE MIRROR                  *
+			* * * * * * * * * * * * * * * * */									
+
+			mirror_gif.rotate(a[2]*2);
 
 		}else if(a[0]==176&&a[1]==4){ //slider 1
 
@@ -611,25 +625,23 @@ if(midi){
 			run = !run;
 
 			if(run){
-				m_out(0,'white');
+				m_out(0,'red');
 			}else{
-				m_out(0,'cyan');
+				m_out(0,'yellow');
 			}
 
 		}else if(a[0]==144&&a[1]==4&&a[2]>0){ //grid button 2
 
+
+
 		}else if(a[0]==144&&a[1]==8&&a[2]>0){ //grid button 3
 
-			/* * * * * * * * * * * * * 
-			*                        *
-			* TOGGLE BORDER BOXES    *
-			* * * * * * * * * * * * */			
+			/* * * * * * * * * * * * *  * 
+			*                           *
+			* DELETE ALL IMAGES         *
+			* * * * * * * * * * * * * * */
 
-			if(border_boxes.run){
-				border_boxes.die();
-			}else{
-				border_boxes.init();
-			}
+			images.clear();
 
 		}else if(a[0]==144&&a[1]==12&&a[2]>0){ //grid button 4
 
@@ -648,30 +660,22 @@ if(midi){
 
 			/* * * * * * * * * * * * * 
 			*                        *
-			* CIRCLE TOGGLE          *
-			* * * * * * * * * * * * */
+			* TOGGLE BORDER BOXES    *
+			* * * * * * * * * * * * */			
 
-			if( !circle.run ){
-				circle.init();
+			if(border_boxes.run){
+				border_boxes.die();
+				m_out(1,'cyan');
 			}else{
-				circle.die();
+				border_boxes.init();
+				m_out(1,'pink');
+
 			}
 
 
 		}else if(a[0]==144&&a[1]==5&&a[2]>0){ //grid button 6
 
-			/* * * * * * * * * * * * * 
-			*                        *
-			* CIRCLE SIZE LOCK       *
-			* * * * * * * * * * * * */
-
-			circle.size_lock = !circle.size_lock;
-
-			if( circle.size_lock ){
-				m_out(5,'cyan');
-			}else{
-				m_out(5,'white');
-			}
+			
 
 		}else if(a[0]==144&&a[1]==9&&a[2]>0){ //grid button 7
 
@@ -680,7 +684,7 @@ if(midi){
 			* MODE ADVANCE           *
 			* * * * * * * * * * * * */
 
-			module_changer.step();
+			// module_changer.step();
 
 
 		}else if(a[0]==144&&a[1]==13&&a[2]>0){ //grid button 8
@@ -708,52 +712,147 @@ if(midi){
 
 		}else if(a[0]==144&&a[1]==2&&a[2]>0){ //grid button 9
 			
-			/* * * * * * * * * * * * *  * 
-			*                           *
-			* WIDTH = AUTO              *
-			* * * * * * * * * * * * * * */			
+			/* * * * * * * * * * * * * 
+			*                        *
+			* CIRCLE MODE            *
+			* * * * * * * * * * * * */
 
-			images.width = "auto";
+			module_changer.start('circle');
+
+			m_out(2,'pink');
+			m_out(3,'green');
+			m_out(6,'green');
+			m_out(10,'green');
+			m_out(14,'green');
+
+			// if( !circle.run ){
+			// 	circle.init();
+			// }else{
+			// 	circle.die();
+			// }
+
+			
 
 		}else if(a[0]==144&&a[1]==6&&a[2]>0){ //grid button 10
 
+			/* * * * * * * * * * * * * 
+			*                        *
+			* CHAIN MODE             *
+			* * * * * * * * * * * * */			
+
+			module_changer.start('chain');
+
+			m_out(2,'green');
+			m_out(3,'green');
+			m_out(6,'pink');
+			m_out(10,'green');
+			m_out(14,'green');
+
 		}else if(a[0]==144&&a[1]==10){ //grid button 11
+
+			/* * * * * * * * * * * * * 
+			*                        *
+			* HALLWAY MODE           *
+			* * * * * * * * * * * * */						
+
+			module_changer.start('hallway');
+
+			m_out(2,'green');
+			m_out(3,'green');
+			m_out(6,'green');
+			m_out(10,'pink');
+			m_out(14,'green');
 
 			/* * * * * * * * * * * * *  * 
 			*                           *
 			* DOUBLER POSITION          *
 			* * * * * * * * * * * * * * */
 
-			toggle_value('double_positioning');
+			// toggle_value('double_positioning');
 
 		}else if(a[0]==144&&a[1]==14&&a[2]>0){ //grid button 12
 
-			/* * * * * * * * * * * * *  * 
-			*                           *
-			* TOGGLE DOUBLER            *
-			* * * * * * * * * * * * * * */
+			/* * * * * * * * * * * * * 
+			*                        *
+			* MIRROR MODE            *
+			* * * * * * * * * * * * */
 
-			chain.doubler = !chain.doubler;
+			module_changer.start('mirror_gif');
 
-			if(chain.doubler){
-				chain.doubler_cursor = 	images.cursor;
-			}
+			m_out(2,'green');
+			m_out(3,'green');
+			m_out(6,'green');
+			m_out(10,'green');
+			m_out(14,'pink');
+
 
 		}else if(a[0]==144&&a[1]==3&&a[2]>0){ //grid button 13
 			
-			/* * * * * * * * * * * * *  * 
-			*                           *
-			* MIRROR VERTICAL STREAM    *
-			* * * * * * * * * * * * * * */
+			/* * * * * * * * * * * * * 
+			*                        *
+			* CENTER MODE            *
+			* * * * * * * * * * * * */
 
-			mirror_gif.vertical_stream = !mirror_gif.vertical_stream;
-			if( mirror_gif.vertical_stream ){
-				m_out(3,'cyan');
-			}else{
-				m_out(3,'white');
-			}
+			module_changer.start('center_pix');
+
+			m_out(2,'green');
+			m_out(3,'pink');
+			m_out(6,'green');
+			m_out(10,'green');
+			m_out(14,'green');			
 
 		}else if(a[0]==144&&a[1]==7&&a[2]>0){ //grid button 14
+
+			// first variable mode option
+
+			if( circle.run ){
+
+				/* * * * * * * * * * * * * 
+				*                        *
+				* CIRCLE SIZE LOCK       *
+				* * * * * * * * * * * * */
+
+				circle.size_lock = !circle.size_lock;
+
+				if( circle.size_lock ){
+					m_out(7,'cyan');
+				}else{
+					m_out(7,'white');
+				}
+
+			}else if( mirror_gif.run ){
+
+				/* * * * * * * * * * * * *  * 
+				*                           *
+				* MIRROR VERTICAL STREAM    *
+				* * * * * * * * * * * * * * */
+
+				mirror_gif.vertical_stream = !mirror_gif.vertical_stream;
+				if( mirror_gif.vertical_stream ){
+					m_out(7,'cyan');
+				}else{
+					m_out(7,'white');
+				}
+
+			}else if( chain.run ){
+				
+				/* * * * * * * * * * * * *  * 
+				*                           *
+				* DOUBLER                   *
+				* * * * * * * * * * * * * * */
+
+				chain.doubler = !chain.doubler;
+
+				if(chain.doubler){
+					chain.doubler_cursor = 	images.cursor;
+					m_out(7,'cyan');
+				}else{
+					m_out(7,'white');					
+				}
+
+			}
+
+			
 
 		}else if(a[0]==144&&a[1]==11&&a[2]>0){ //grid button 15
 
@@ -762,16 +861,11 @@ if(midi){
 			* DELETE CHAIN IMAGES       *
 			* * * * * * * * * * * * * * */
 
-			$('.chain').remove();
+			// $('.chain').remove();
 
 		}else if(a[0]==144&&a[1]==15&&a[2]>0){ //grid button 16
 			
-			/* * * * * * * * * * * * *  * 
-			*                           *
-			* DELETE ALL IMAGES         *
-			* * * * * * * * * * * * * * */
-
-			images.clear();
+			
 
 		}else if(a[0]==144&&a[1]==16&&a[2]>0){ //seq button 1
 
@@ -1019,6 +1113,13 @@ if(midi){
 
 		}else if(a[0]==144&&a[1]==38&&a[2]>0){ //seq button LOW 7
 
+			/* * * * * * * * * * * * *  * 
+			*                           *
+			* WIDTH = AUTO              *
+			* * * * * * * * * * * * * * */			
+
+			images.width = "auto";
+
 		}else if(a[0]==144&&a[1]==39&&a[2]>0){ //seq button LOW 8
 
 			/* * * * * * * * *  * 
@@ -1121,23 +1222,27 @@ if(midi){
 	// DEFAULT COLOR OF BUTTONS
 
 	// GRID BUTTONS
+	// Grouped in columns
 	
-	m_out(0,'white');
-	m_out(1,'off');
-	m_out(2,'off');
-	m_out(3,'white');
-	m_out(4,'off');
-	m_out(5,'off');
-	m_out(6,'off');
-	m_out(7,'off');
-	m_out(8,'green');
+	m_out(0,'red');
+	m_out(1,'cyan');
+	m_out(2,'green');
+	m_out(3,'green');
+
+	m_out(4,'red');
+	m_out(5,'cyan');
+	m_out(6,'pink');
+	m_out(7,'white');
+	
+	m_out(8,'red');
 	m_out(9,'cyan');
-	m_out(10,'white');
-	// m_out(11,'red');
+	m_out(10,'green');
+	m_out(11,'white');
+	
 	m_out(12,'red'); 
-	// m_out(13,'green');
-	m_out(14,'white');
-	m_out(15,'red');
+	m_out(13,'cyan');
+	m_out(14,'green');
+	m_out(15,'white');
 
 	// ENCODERS (turn them off)
 	m_out(48,'white');
@@ -1170,6 +1275,8 @@ if(midi){
 	// m_out(36,'blue');
 	// m_out(37,'blue');
 
+	m_out(38,'pink'); // WAUTO
+
 	m_out(39,'yellow');
 
 	m_out(24,'green');
@@ -1182,10 +1289,10 @@ if(midi){
 	// m_out(43,'blue');
 	// m_out(44,'blue');
 
-	m_out(29,'pink');
-	m_out(30,'pink');
-	m_out(45,'white');
-	m_out(46,'white');
-	m_out(31,'pink');
-	m_out(47,'white');
+	// m_out(29,'pink');
+	// m_out(30,'pink');
+	// m_out(45,'white');
+	// m_out(46,'white');
+	// m_out(31,'pink');
+	// m_out(47,'white');
 }

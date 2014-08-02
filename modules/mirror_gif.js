@@ -33,6 +33,7 @@
 
 m_left = 0;
 var mirror_gif={
+	box: $('#mirror-box'),
 	run: false,
 	current_amount: 0,
 	boxes: $('#mirror-left, #mirror-right'),
@@ -97,8 +98,8 @@ var mirror_gif={
 			mirror_gif.boxes.find('img:gt('+images.amount+')').remove();
 			mirror_gif.current_amount = images.amount;
 		}
-
-
-
+	},
+	rotate: function(deg){
+		mirror_gif.box.css('-webkit-transform','rotate('+(-1*deg)+'deg)');
 	}
 };

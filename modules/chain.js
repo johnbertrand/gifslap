@@ -110,11 +110,11 @@ var chain = {
 			if( chain.doubler_y > window.innerHeight ){ chain.doubler_y = chain.doubler_y%window.innerHeight; }
 			if(chain.doubler_y < 0){ chain.doubler_y = window.innerHeight + chain.doubler_y%window.innerHeight; }
 			
-			chain.doubler_x = chain.pos_x+chain.doubler_left;
+			chain.doubler_x = chain.pos_x+images.width;
 			if( chain.doubler_x > window.innerWidth ){ chain.doubler_x = chain.doubler_x%window.innerWidth;}
 			if( chain.doubler_x < 0 ){ chain.doubler_x=window.innerWidth + chain.doubler_x%window.innerWidth;}
 			
-			$('#text').text(chain.doubler_size);
+			// $('#text').text(chain.doubler_size);
 			
 			chain.container.prepend($('<img />')
 				.attr('src',images.set_array[chain.doubler_cursor])
